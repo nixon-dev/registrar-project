@@ -50,12 +50,6 @@
                         <h4 class="text-dark">Created:
                             {{ \Carbon\Carbon::parse($info[0]->created_at)->format('M d, Y - h:i A') }}</h4>
                         <h4 class="text-dark">Role: {{ $info[0]->role }}</h4>
-                        @if ($info[0]->role == 'Administrator')
-                        @elseif ($info[0]->office_id == null)
-                            <h4 class="text-dark">Office: No Assigned Office</h4>
-                        @else
-                            <h4 class="text-dark">Office: {{ $info[0]->office_name }}</h4>
-                        @endif
 
                     </div>
                 </div>
@@ -63,7 +57,7 @@
             <div class="col-lg-6">
                 <div class="ibox ">
                     <div class="ibox-title">
-                        <h5>Assign Roles and Office</h5>
+                        <h5>Assign Roles</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -87,25 +81,11 @@
                                 <label>Role</label>
                                 <select name="role" class="form-control" id="roleSelect">
                                     <option value="Guest" {{ $info[0]->role == 'Guest' ? 'selected' : '' }}>Guest</option>
-                                    <option value="Staff" {{ $info[0]->role == 'Staff' ? 'selected' : '' }}>Staff</option>
                                     <option value="Administrator"
                                         {{ $info[0]->role == 'Administrator' ? 'selected' : '' }}>Administrator</option>
                                 </select>
                             </div>
 
-                            <div id="officeDiv"
-                                class="form-group {{ $info[0]->role == 'Administrator' ? 'd-none' : '' }}{{ $info[0]->role == 'Guest' ? 'd-none' : '' }}">
-                                <label>Office</label>
-                                <select id="mySelect" class="form-control p-w-sm select2" style="width: 100%;"
-                                    name="office_id">
-                                    <option value=""></option>
-                                    @foreach ($office as $o)
-                                        <option value="{{ $o->office_id }}"
-                                            {{ $info[0]->office_id == $o->office_id ? 'selected' : '' }}>
-                                            {{ $o->office_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
                             <div class="form-group text-center">
                                 <button class="btn btn-sm btn-primary m-t-n-xs w-100" type="submit"><strong>Submit</strong>

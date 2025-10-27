@@ -1,13 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\ChangePasswordController;
-use App\Http\Controllers\Document\DocumentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
 Route::middleware(['auth', 'role:Administrator'])->prefix('dioikitis')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
 
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
 
     Route::get('/document-tracking/{id}', [AdminController::class, 'view_document'])->name('admin.document-view');
 
@@ -16,8 +15,6 @@ Route::middleware(['auth', 'role:Administrator'])->prefix('dioikitis')->group(fu
     Route::post('/document-tracking/add', [AdminController::class, 'document_request_add'])->name('admin.document-add-request');
 
     Route::post('/document-tracking/update', [AdminController::class, 'document_request_update'])->name('admin.document-update-request');
-
-
 
     Route::get('/user-settings', [AdminController::class, 'user_settings'])->name('admin.user-settings');
 
@@ -42,6 +39,4 @@ Route::middleware(['auth', 'role:Administrator'])->prefix('dioikitis')->group(fu
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
 
     Route::get('/account-settings', [AdminController::class, 'account_settings'])->name('admin.new-settings');
-
-
 });

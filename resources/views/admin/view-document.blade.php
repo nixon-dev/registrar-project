@@ -26,10 +26,10 @@
             <h2>View Document</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="/admin/dashboard">Admin</a>
+                    <a href="{{ route('admin.index') }}">Admin</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="/admin/document-tracking">Document Tracking</a>
+                    <a href="{{ route('admin.document') }}">Document Tracking</a>
                 </li>
                 <li class="breadcrumb-item active">
                     <strong>{{ $data->dr_id }}</strong>
