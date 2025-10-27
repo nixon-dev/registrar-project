@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base.admin')
 @section('title', $info[0]->name . ' - Registrar Office (QSU)')
 @section('css')
     <link href="{{ asset('css/plugins/iCheck/custom.css') }}" rel="stylesheet">

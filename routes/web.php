@@ -9,23 +9,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Auth;
 
-// Route::get('/', function () {
-
-//     $user = Auth::user();
-
-//     if ($user == null) {
-//         return redirect('/login');
-//     }
-
-//     if ($user->role === 'Administrator') {
-//         return redirect('/admin/dashboard');
-//     } elseif ($user->role === 'Staff') {
-//         return redirect('/staff/dashboard');
-//     } else {
-//         return redirect('/login');
-//     }
-// })->name('index');
-
 
 Route::get('/', [GuestController::class,'index'])->name('home');
 
@@ -40,7 +23,8 @@ Route::post('/hjkmqladasgq', [RegisterController::class, 'register']);
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::fallback(function () {
-    return response()->view('404', [], 404);
+    return response()->view('errors.404', [], 404);
 });
+
 
 require __DIR__ . '/admin.php';

@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base.admin')
 @section('title', 'Users - Registrar Office (QSU)')
 @section('css')
     <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">

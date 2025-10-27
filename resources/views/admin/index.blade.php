@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base.admin')
 @section('title', 'Dashboard - Registrar Office (QSU)')
 @section('content')
     <div class="row  border-bottom white-bg dashboard-header">

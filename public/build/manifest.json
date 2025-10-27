@@ -1,6 +1,26 @@
 {
+  "public/css/patterns/3.png": {
+    "file": "assets/3-CBu3YWLv.png",
+    "src": "public/css/patterns/3.png"
+  },
+  "public/css/patterns/4.png": {
+    "file": "assets/4-C8zHJPS7.png",
+    "src": "public/css/patterns/4.png"
+  },
+  "public/css/patterns/header-profile-skin-1.png": {
+    "file": "assets/header-profile-skin-1-BbSCcRjg.png",
+    "src": "public/css/patterns/header-profile-skin-1.png"
+  },
+  "public/css/patterns/header-profile-skin-3.png": {
+    "file": "assets/header-profile-skin-3-BvCWdl3a.png",
+    "src": "public/css/patterns/header-profile-skin-3.png"
+  },
+  "public/css/patterns/shattered.png": {
+    "file": "assets/shattered-BNaWUCF0.png",
+    "src": "public/css/patterns/shattered.png"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-56sq6kY2.css",
+    "file": "assets/app-CnAhfRvA.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },

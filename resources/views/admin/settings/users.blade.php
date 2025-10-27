@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base.admin')
 @section('title', 'Users - Registrar Office (QSU)')
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">

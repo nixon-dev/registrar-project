@@ -1,4 +1,4 @@
-@extends('guest.base2')
+@extends('base.guest')
 @section('title', 'Result - Registrar Office (QSU)')
 @section('head')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -54,14 +54,14 @@
                 </div>
             @empty
                 <div class="col-12 text-center">
-                    <i class="fa fa-search fa-5x mb-3" aria-hidden="true"></i>
+                    <h1><i class="fa fa-search fa-5x mb-3 mt-4" aria-hidden="true"></i></h1>
                     <h3>No "Request for Document" Found</h3>
                     <p class="text-white">
-                        Make sure your school id correct...
+                        Make sure your school id is correct...
                     </p>
-                    <a href="{{ route('home') }}" class="btn btn-sm btn-primary mb-3 "><i class="fa fa-arrow-left"
+                    <a href="{{ route('home') }}" class="btn btn-sm btn-primary mb-3 "><i class="fa fa-repeat"
                             aria-hidden="true"></i>
-                        Back</a>
+                        Try Again</a>
                 </div>
             @endforelse
         </div>

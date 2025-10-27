@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base.admin')
 @section('title', 'Document Request - Registrar Office (QSU)')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />

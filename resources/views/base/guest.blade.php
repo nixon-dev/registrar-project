@@ -8,17 +8,17 @@
     <link rel="icon" type="image/ico" href="{{ asset('img/favicon.ico') }}">
     <title> @yield('title', 'Registrar Office (QSU)')</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('font-awesome/css/font-awesome.css ') }}" rel="stylesheet">
+    <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/personal.css') }}" rel="stylesheet">
+    @vite(['resources/css/app.css'])
+
     @yield('head')
 </head>
 <body class="dark-skin-2">
     <div class="loginColumns animated fadeInDown" style="margin-top: -80px;">
         <div class="row">
-            <div class="col-sm-12 text-center mb-2">
-                <img id="qsulogo" class="text-center" src="{{ asset('img/logo/QSU.png') }}"
+            <div class="col-sm-12 d-flex justify-content-center mb-2">
+                <img id="qsulogo" src="{{ asset('img/logo/QSU.png') }}"
                     style="width: 150px; height: auto; object-fit: cover;" />
             </div>
             <div class="col-sm-12">

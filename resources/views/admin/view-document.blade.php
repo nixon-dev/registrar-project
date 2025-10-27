@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('base.admin')
 @section('title', 'View Document Request- Registrar Office (QSU)')
 
 @section('css')
