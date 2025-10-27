@@ -1,5 +1,5 @@
 @extends('admin.base')
-@section('title', 'Activity Logs - Management Information System')
+@section('title', 'Activity Logs - Registrar Office (QSU)')
 @section('css')
     <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />

@@ -1,5 +1,5 @@
 @extends('admin.base')
-@section('title', 'User Setting - Management Information System')
+@section('title', 'User Setting - Registrar Office (QSU)')
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-8">

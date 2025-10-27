@@ -1,5 +1,5 @@
 @extends('admin.base')
-@section('title', 'Document Tracking - Management Information System')
+@section('title', 'Document Request - Registrar Office (QSU)')
 @section('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
@@ -182,9 +182,10 @@
                                         <td> {{ $d->username }} </td>
                                         @php
                                             $statusClass = match ($d->status) {
+                                                'Released' => 'inverse',
                                                 'For Release' => 'success',
                                                 'For Signing' => 'info',
-                                                'On Process' => 'primary',
+                                                'Pending' => 'primary',
                                                 default => 'info',
                                             };
                                         @endphp

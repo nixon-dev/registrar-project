@@ -18,10 +18,8 @@ class LoginController extends Controller
         }
 
         if ($user->role === 'Administrator') {
-            return redirect('/admin/dashboard');
-        } elseif ($user->role === 'Staff') {
-            return redirect('/staff/dashboard');
-        } else {
+            return redirect(route('admin.index'));
+         } else {
             return view(view: 'auth.login');
         }
     }

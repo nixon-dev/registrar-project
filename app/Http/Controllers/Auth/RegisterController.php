@@ -20,11 +20,9 @@ class RegisterController extends Controller
         }
 
         if ($user->role === 'Administrator') {
-            return redirect('/admin/dashboard');
-        } elseif ($user->role === 'Staff') {
-            return redirect('/staff/dashboard');
+            return redirect(route('admin.index'));
         } else {
-            return view('auth.register');
+            return view(view: 'auth.login');
         }
     }
 
@@ -50,6 +48,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect('/login')->with('success', 'Registration successful! You can now log in.');
+        return redirect(route('auth.login'))->with('success', 'Registration successful! You can now log in.');
     }
 }

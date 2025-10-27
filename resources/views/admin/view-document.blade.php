@@ -1,22 +1,8 @@
 @extends('admin.base')
-@section('title', 'View Document - Management Information System')
+@section('title', 'View Document Request- Registrar Office (QSU)')
 
 @section('css')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="{{ asset('css/plugins/iCheck/custom.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/plugins/jQueryUI/jquery-ui.css') }}" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
-    <style>
-        .dropzone {
-            background: #e3e6ff;
-            border-radius: 13px;
-            max-width: 550px;
-            margin-left: auto;
-            margin-right: auto;
-            border: 2px dotted #1833FF;
-            margin-top: 50px;
-        }
-    </style>
 @endsection
 
 
@@ -50,7 +36,8 @@
 
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
             <div class="wrapper wrapper-content animated fadeInDown">
                 <div class="ibox">
                     <div class="ibox-content">
@@ -153,7 +140,7 @@
                     </div>
                     <div class="form-group">
                         <select name="status" class="form-control">
-                            <option value="On Process" {{ $data->status == 'On Process' ? 'selected' : '' }}>On Process
+                            <option value="Pending" {{ $data->status == 'Pending' ? 'selected' : '' }}>Pending
                             </option>
                             <option value="For Signing" {{ $data->status == 'For Signing' ? 'selected' : '' }}>For Signing
                             </option>

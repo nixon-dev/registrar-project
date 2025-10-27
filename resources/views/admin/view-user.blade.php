@@ -1,5 +1,5 @@
 @extends('admin.base')
-@section('title', $info[0]->name . ' - Management Information System')
+@section('title', $info[0]->name . ' - Registrar Office (QSU)')
 @section('css')
     <link href="{{ asset('css/plugins/iCheck/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" rel="stylesheet">
@@ -22,11 +22,6 @@
                 </li>
             </ol>
         </div>
-        {{-- <div class="col-sm-4">
-            <div class="title-action">
-                <a href="" class="btn btn-primary">This is action area</a>
-            </div>
-        </div> --}}
     </div>
 
     <div class="wrapper wrapper-content animated fadeInDown">
