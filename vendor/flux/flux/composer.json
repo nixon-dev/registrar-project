@@ -1,0 +1,13 @@
+{
+    "name": "flux/flux",
+    "type": "library",
+    "description": " Flux initial empty Package. Please stay tuned.",
+    "license": "MIT",
+    "keywords": [
+        "flux",
+        "library"
+    ],
+    "require": {
+        "php": "^8.0"
+    }
+}

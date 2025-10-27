@@ -1,0 +1,191 @@
+.dark-skin {
+    font-weight: 600;
+    background: #0d0e13 !important;
+    color: #fff;
+}
+
+.dark-skin-2 {
+    font-weight: 600;
+    background: #111119 !important;
+    color: #fff;
+}
+
+.white-skin {
+    font-weight: 600;
+    background: #f7f8fd;
+    color: #000;
+}
+
+.light-skin-2 {
+    background: #f5f8fd;
+}
+
+.black {
+    background: #030404;
+}
+
+.pink {
+    background: #ca436c;
+}
+
+.blue {
+    background: #1d30fe;
+}
+
+.blue-1 {
+    background: #38a4ec;
+}
+
+.gray {
+    background: #2b2d3a;
+}
+
+.white {
+    background: #fcfbff;
+}
+
+.light-blue {
+    background: #addaf1;
+}
+
+.red {
+    background: #f84a65;
+}
+
+.text-red {
+    color: #f84a65;
+}
+
+.purple {
+    background: #9121fe;
+}
+
+.text-purple {
+    color: #9121fe;
+}
+
+.box-red {
+    padding-top: 5px;
+    padding-bottom: 9px;
+    margin-bottom: 10px;
+    background: #f84a65;
+}
+
+.yellow {
+    background: #fadd39;
+}
+
+.green {
+    background: #73f50c;
+}
+
+.color {
+    background: #11101a;
+    background: #2f2e3f;
+    background: #5851d5;
+    background: #ff9652;
+    background: #fff92f;
+}
+
+.border-radius-3 {
+    border-radius: 3%;
+}
+
+.m-t-10 {
+    margin-top: 10px;
+}
+
+.p-l-1 {
+    padding-left: 1px;
+}
+
+.p-l-2 {
+    padding-left: 2px;
+}
+
+.p-l-3 {
+    padding-left: 3px;
+}
+
+.p-r-1 {
+    padding-right: 1px;
+}
+
+.p-r-2 {
+    padding-right: 2px;
+}
+
+.p-r-3 {
+    padding-right: 3px;
+}
+
+.m-l-10 {
+    margin-left: 10px;
+}
+
+.fs-16 {
+    font-size: 14px;
+}
+
+.fs-18 {
+    font-size: 16px;
+}
+
+.wp-5 {
+    width: 5% !important;
+}
+.wp-10 {
+    width: 10% !important;
+}
+
+.wp-15 {
+    width: 15% !important;
+}
+
+.wp-25 {
+    width: 25% !important;
+}
+
+.wp-20 {
+    width: 20% !important;
+}
+
+.wp-30 {
+    width: 30% !important;
+}
+
+.wp-35 {
+    width: 35% !important;
+}
+
+.wp-40 {
+    width: 40% !important;
+}
+
+.wp-50 {
+    width: 50% !important;
+}
+
+.wp-60 {
+    width: 60% !important;
+}
+
+.wp-70 {
+    width: 70% !important;
+}
+
+.wp-75 {
+    width: 75% !important;
+}
+
+.wp-80 {
+    width: 80% !important;
+}
+
+.wp-90 {
+    width: 90% !important;
+}
+
+.wp-100 {
+    width: 100% !important;
+}
