@@ -1,8 +1,8 @@
-# 📄 Document Tracking System
+# 📄 Document Status Tracking System
 
-A Laravel 12 web application, it manages office documents with role-based dashboards and features interactive reports using DataTables and ChartJs.
+A Laravel 12 web application, it manages registrar request for documents status with admin dashboards and features interactive reports using DataTables and ChartJs.
 
-> 🚀 This project was developed during our On-the-Job Training using Laravel 12 as a full-stack framework and MySQL as the database.
+> 🚀 This project was developed during my time as a Registrar Staff on QSU Registrar using Laravel 12 as a full-stack framework and MySQL as the database.
 
 ---
 
@@ -10,10 +10,8 @@ A Laravel 12 web application, it manages office documents with role-based dashbo
 
 - 📊 Interactive data tables using DataTables
 - 📈 Visual reports using Chart.js
-- 🔐 Admin and User authentication system
-- 🛠 Admin dashboard for managing offices and staffs
-- 🤵🏻Budget Office Staff dashboard for giving budgets to office
-- 🧑🏼‍🦰 Staff dashboard for submitting documents
+- 🔐 Admin authentication system
+- 🛠 Admin dashboard for managing documents.
 
 ---
 
@@ -31,7 +29,7 @@ A Laravel 12 web application, it manages office documents with role-based dashbo
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/nixon-dev/mis-project.git
+   git clone https://github.com/nixon-dev/registrar-project.git
 2. **Install vendors**
    ```bash
    composer install
@@ -41,7 +39,7 @@ A Laravel 12 web application, it manages office documents with role-based dashbo
       DB_CONNECTION=mysql
       DB_HOST=127.0.0.1
       DB_PORT=3306
-      DB_DATABASE=mis
+      DB_DATABASE=registrar
       DB_USERNAME=root
       DB_PASSWORD=
       ```
