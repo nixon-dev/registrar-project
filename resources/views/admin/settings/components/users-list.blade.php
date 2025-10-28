@@ -1,8 +1,11 @@
-<table class="table table-bordered table-hover users-table" style="width: 100%;">
+@section('css')
+    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
+@endsection
+<table class="table table-bordered table-hover users-table" id="users-table" style="width: 100%;">
     <thead>
         <tr>
             <th class="wp-30" scope="col">Name</th>
-            <th class="wp-40">Email</th>
+            <th class="wp-40">Username</th>
             <th class="wp-20">Role</th>
             <th class="wp-10 text-center">Manage</th>
         </tr>
@@ -11,7 +14,7 @@
         @forelse ($usersList as $ul)
             <tr>
                 <td> {{ $ul->name }} </td>
-                <td> {{ $ul->email }} </td>
+                <td> {{ $ul->username }} </td>
                 <td> {{ $ul->role }} </td>
                 <td class="text-center">
                     <a href="{{ route('admin.users-view', ['id' => $ul->id]) }}" class="btn btn-primary btn-sm">
@@ -39,7 +42,7 @@
     $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-white btn-sm';
 
     $(document).ready(function() {
-        $('.users-table').DataTable({
+        $('#users-table').DataTable({
             pageLength: 10,
             order: [],
             responsive: true,

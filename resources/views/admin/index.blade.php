@@ -120,7 +120,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Name</th>
-                                    <th>IP Adress</th>
+                                    <th>Location</th>
                                     <th>User Agent</th>
                                     <th>Last Activity</th>
                                 </tr>
@@ -131,35 +131,35 @@
                                         <td>
                                             {{ $au->name ? $au->name : 'Guest' }}
                                         </td>
-                                        <!--                                         <td>
-                                                                            @php
-                                                                                $ip = $au->ip_address;
-                                                                                $ipAddress = 'Unknown';
-
-                                                                                try {
-                                                                                    $response = @file_get_contents("https://ipinfo.io/{$ip}/json");
-
-                                                                                    if ($response) {
-                                                                                        $details = json_decode($response);
-
-                                                                                        $city = $details->city ?? null;
-                                                                                        $region = $details->region ?? null;
-                                                                                        $country = $details->country ?? null;
-
-                                                                                        $parts = array_filter([$city, $region, $country]);
-                                                                                        if (!empty($parts)) {
-                                                                                            $ipAddress = implode(', ', $parts);
-                                                                                        }
-                                                                                    }
-                                                                                } catch (\Exception $e) {
-                                                                                    $ipAddress = 'Unknown';
-                                                                                }
-                                                                            @endphp
-                                                                            {{ $ipAddress }}
-                                                                        </td> -->
                                         <td>
-                                            {{ $au->ip_address }}
+                                            @php
+                                                $ip = $au->ip_address;
+                                                $ipAddress = 'Unknown';
+
+                                                try {
+                                                    $response = @file_get_contents("https://ipinfo.io/{$ip}/json");
+
+                                                    if ($response) {
+                                                        $details = json_decode($response);
+
+                                                        $city = $details->city ?? null;
+                                                        $region = $details->region ?? null;
+                                                        $country = $details->country ?? null;
+
+                                                        $parts = array_filter([$city, $region, $country]);
+                                                        if (!empty($parts)) {
+                                                            $ipAddress = implode(', ', $parts);
+                                                        }
+                                                    }
+                                                } catch (\Exception $e) {
+                                                    $ipAddress = 'Unknown';
+                                                }
+                                            @endphp
+                                            {{ $ipAddress }}
                                         </td>
+                                        <!-- <td>
+                                            {{ $au->ip_address }}
+                                        </td> -->
 
                                         <td>
                                             @php

@@ -5732,6 +5732,10 @@ ul.clear-list:first-child {
     font-size: 16px;
 }
 
+.fs-20 {
+    font-size: 20px;
+}
+
 .wp-5 {
     width: 5% !important;
 }

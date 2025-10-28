@@ -214,9 +214,10 @@ class AdminController extends Controller
         $request->validate([
             'dr_id' => 'required|numeric',
             'status' => 'required|string',
+            'remarks' => 'nullable|string|max:255',
         ]);
 
-        $query = Document::where('dr_id', $request->dr_id)->update(['status' => $request->status]);
+        $query = Document::where('dr_id', $request->dr_id)->update(['status' => $request->status, 'remarks' => $request->remarks]);
 
         $student_id = Document::where('dr_id', $request->dr_id)->value('student_id');
         

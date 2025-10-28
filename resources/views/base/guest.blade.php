@@ -14,6 +14,7 @@
 
     @yield('head')
 </head>
+
 <body class="dark-skin-2">
     <div class="loginColumns animated fadeInDown" style="margin-top: -80px;">
         <div class="row">
@@ -32,12 +33,17 @@
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-12 text-white">
-                <small class="pull-right">/nixon-dev</small>
-                © Quirino State University - Registrar Office
+            <div class="footer dark-skin-2">
+                <div class="text-white pull-left">
+                    <small>© QSU - Registrar Office</small>
+                </div>
+                <div class="pull-right text-white">
+                    <small class="pull-right">/nixon-dev</small>
+                </div>
             </div>
         </div>
     </div>
+
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js ') }}"></script>
     <script src="{{ asset('js/bootstrap.js') }}"></script>
@@ -79,8 +85,9 @@
 
                     console.log(`Click count: ${clickCounter}`);
                 });
-            } 
+            }
         });
     </script>
 </body>
+
 </html>

@@ -23,7 +23,7 @@
                                     'For Release' => 'primary',
                                     'For Signing' => 'warning',
                                     'On Process' => 'light',
-                                    default => 'secondary',
+                                    default => 'info text-dark',
                                 };
                             @endphp
                             <span class="badge bg-{{$status}} float-right p-2"><strong>{{ $d->status }}</strong></span>
@@ -42,13 +42,23 @@
                         </h4>
                         <br>
                         <div class="row g-2">
+                            @if (!empty($d->remarks))
+                                <div class="col-6 fw-bold">
+                                    <h4>Remarks:</h4>
+                                </div>
+                                <div class="col-6 text-right fw-bold">
+                                    <h4>{{ $d->remarks ?? '' }}</h4>
+                                </div>
+                            @endif
                             <div class="col-6">Student ID:</div>
                             <div class="col-6 text-right text-secondary">{{$d->student_id}}</div>
                             <div class="col-6">Purpose:</div>
                             <div class="col-6 text-right text-secondary">{{ $d->purpose }}</div>
+
                             <div class="col-6">Last Updated:</div>
                             <div class="col-6 text-right text-secondary">
-                                {{  Carbon\Carbon::parse($d->updated_at)->format('M d, Y') }}</div>
+                                {{  Carbon\Carbon::parse($d->updated_at)->format('M d, Y') }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -66,4 +76,5 @@
             @endforelse
         </div>
     </div>
+   
 @endsection

@@ -7,7 +7,10 @@
 @endsection
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
+            <div class="title-action pull-right">
+                <a data-toggle="modal" href="#modal-form" class="btn btn-primary">Add Request</a>
+            </div>
             <h2>Document Tracking</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -17,132 +20,6 @@
                     <strong>Document Tracking</strong>
                 </li>
             </ol>
-        </div>
-        <div class="col-sm-4">
-            <div class="title-action">
-                <a data-toggle="modal" href="#modal-form" class="btn btn-primary">Add Request</a>
-            </div>
-            <div id="modal-form" class="modal fade" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <div class="row">
-
-                                <div class="col-sm-12">
-                                    <h3 class="m-t-none m-b">Request Info</h3>
-
-                                    <form role="form" action="{{ route('admin.document-add-request') }}" method="POST">
-                                        @csrf()
-                                        <div class="form-group d-none">
-                                            <label>ID</label>
-                                            <input type="text" name="admin_id" value="{{ Auth::id() }}" class="form-control"
-                                                readonly>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Request Date</label>
-                                            <input type="date" name="request_date" value="{{ date('Y-m-d') }}"
-                                                class="form-control" onfocus="this.showPicker()">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Request Type</label>
-                                            <select name="request_type" class="form-control" required>
-                                                <option value="Transcript of Records" selected>Transcript of Records
-                                                </option>
-                                                <option value="Diploma">Diploma</option>
-                                                <option value="Certificate of Graduation">Certificate of Graduation</option>
-                                                <option value="Others (WIP)">Others (WIP)</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-6">
-
-                                                <div class="form-group">
-                                                    <label>Student ID</label>
-                                                    <input type="text" name="student_id" placeholder="" class="form-control"
-                                                        required>
-                                                </div>
-
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Last Name</label>
-                                                    <input type="text" name="last_name" placeholder=""
-                                                        class="form-control title-case-input" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>First Name</label>
-                                                    <input type="text" name="first_name" placeholder=""
-                                                        class="form-control title-case-input" required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-
-                                                <div class="form-group">
-                                                    <label>Middle Name</label>
-                                                    <input type="text" name="middle_name" placeholder=""
-                                                        class="form-control title-case-input">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Course</label>
-                                                    <input type="text" name="course" placeholder="" class="form-control"
-                                                        required>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label>Year Graduated</label>
-                                                    <input type="text" name="year_graduated"
-                                                        placeholder="2023 / 2024 / 2025" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>OR Number</label>
-                                            <input type="text" name="or_number" placeholder="" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>OR Date</label>
-                                            <input type="date" name="or_date" class="form-control"
-                                                onfocus="this.showPicker()">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Purpose</label>
-                                            <input type="text" name="purpose" placeholder=""
-                                                class="form-control title-case-input">
-                                        </div>
-                                        <div class="form-group">
-                                            <select name="status" class="form-control" required>
-                                                <option value="Pending">Pending</option>
-                                                <option value="For Signing" selected>For Signing</option>
-                                                <option value="For Release">For Release</option>
-                                                <option value="Released">Released</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group text-center">
-                                            <button class="btn btn-sm btn-primary m-t-n-xs w-100"
-                                                type="submit"><strong>Submit</strong>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -161,12 +38,12 @@
                             <thead>
                                 <tr>
                                     <th class="wp-10">Request Date</th>
-                                    <th class="wp-10">ID</th>
+                                    <th class="wp-10">Student ID</th>
                                     <th class="wp-20">Name</th>
-                                    <th class="wp-2">Type of Request</th>
+                                    <th class="wp-15">Type of Request</th>
                                     <th class="wp-20">Purpose</th>
                                     <th class="wp-10">By</th>
-                                    <th class="wp-10 text-center">Status</th>
+                                    <th class="wp-15 text-center">Status</th>
                                     <th class="wp-20 text-center">View</th>
                                 </tr>
                             </thead>
@@ -180,17 +57,8 @@
                                         <td> {{ $d->purpose }} </td>
 
                                         <td> {{ $d->username }} </td>
-                                        @php
-                                            $statusClass = match ($d->status) {
-                                                'Released' => 'inverse',
-                                                'For Release' => 'success',
-                                                'For Signing' => 'info',
-                                                'Pending' => 'primary',
-                                                default => 'info',
-                                            };
-                                        @endphp
-                                        <td class="text-center">
-                                            <H3><span class="label label-{{ $statusClass }}">{{ $d->status }}</span></H3>
+                                        <td class="text-center font-bold">
+                                            {{ $d->status }}
                                         </td>
                                         <td class="text-center">
                                             <a href="{{ route('admin.document-view', ['id' => $d->dr_id]) }}"
@@ -205,16 +73,134 @@
                             <tfoot>
                                 <tr>
                                     <th class="wp-10">Request Date</th>
-                                    <th class="wp-10">ID</th>
+                                    <th class="wp-10">Student ID</th>
                                     <th class="wp-20">Name</th>
-                                    <th class="wp-10">Type of Request</th>
+                                    <th class="wp-15">Type of Request</th>
                                     <th class="wp-20">Purpose</th>
                                     <th class="wp-10">By</th>
-                                    <th class="wp-20 text-center">Status</th>
+                                    <th class="wp-15 text-center">Status</th>
                                     <th class="wp-20 text-center">View</th>
                                 </tr>
                             </tfoot>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-form" class="modal fade" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">Request Info</h3>
+
+                            <form role="form" action="{{ route('admin.document-add-request') }}" method="POST">
+                                @csrf()
+                                <div class="form-group d-none">
+                                    <label>ID</label>
+                                    <input type="text" name="admin_id" value="{{ Auth::id() }}" class="form-control"
+                                        readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Request Date</label>
+                                    <input type="date" name="request_date" value="{{ date('Y-m-d') }}" class="form-control"
+                                        onfocus="this.showPicker()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Request Type *</label>
+                                    <select name="request_type" class="form-control" required>
+                                        <option value="Transcript of Records" selected>Transcript of Records
+                                        </option>
+                                        <option value="Diploma">Diploma</option>
+                                        <option value="Certificate of Graduation">Certificate of Graduation</option>
+                                        <option value="Others (WIP)">Others (WIP)</option>
+                                    </select>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label>Student ID *</label>
+                                            <input type="text" name="student_id" placeholder="" class="form-control"
+                                                required>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Last Name *</label>
+                                            <input type="text" name="last_name" placeholder="" class="form-control "
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>First Name *</label>
+                                            <input type="text" name="first_name" placeholder="" class="form-control "
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            <input type="text" name="middle_name" placeholder="" class="form-control ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Course *</label>
+                                            <input type="text" name="course" placeholder="" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Year Graduated</label>
+                                            <input type="text" name="year_graduated" placeholder="2023 / 2024 / 2025"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>OR Number</label>
+                                    <input type="text" name="or_number" placeholder="" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>OR Date</label>
+                                    <input type="date" name="or_date" class="form-control" onfocus="this.showPicker()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Purpose</label>
+                                    <input type="text" name="purpose" placeholder="" class="form-control ">
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select name="status" class="form-control" required>
+                                        <option value="Pending">Pending</option>
+                                        <option value="For Signing" selected>For Signing</option>
+                                        <option value="For Release">For Release</option>
+                                        <option value="Released">Released</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <button class="btn btn-sm btn-primary m-t-n-xs w-100"
+                                        type="submit"><strong>Submit</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,17 +219,17 @@
                 language: {
                     zeroRecords: "No Request Found"
                 },
-                pageLength: 25,
+                pageLength: 50,
                 order: [],
                 responsive: true,
                 columnDefs: [{
                     'orderable': false,
-                    'targets': [5, 6]
+                    'targets': [6, 7]
                 }],
                 initComplete: function () {
                     const api = this.api();
                     if (api.data().count() > 0) {
-                        api.columns([3, 5])
+                        api.columns([3, 5, 6])
                             .every(function () {
                                 var column = this;
 
@@ -272,51 +258,5 @@
             });
         });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Target all input elements that have the class 'title-case-input'
-            const inputs = document.querySelectorAll('.title-case-input');
 
-            inputs.forEach(input => {
-                input.addEventListener('input', function (event) {
-                    const currentInput = event.target;
-                    const originalValue = currentInput.value;
-
-                    // 1. Trim leading/trailing whitespace and convert the whole string to lowercase.
-                    //    We use .trimEnd() to allow a user to type a space to start the next word.
-                    const cleanedValue = originalValue.trimEnd().toLowerCase();
-
-                    // 2. Split the string by one or more whitespace characters (\s+).
-                    //    This correctly handles single spaces, multiple spaces, etc.
-                    const words = cleanedValue.split(/\s+/);
-
-                    // 3. Map over the words and apply Title Case
-                    const titleCaseWords = words.map(word => {
-                        // If the word has content, capitalize the first letter and rejoin the rest.
-                        if (word.length > 0) {
-                            return word.charAt(0).toUpperCase() + word.slice(1);
-                        }
-                        return word; // Returns an empty string if there was extra whitespace
-                    });
-
-                    // 4. Rejoin the words with a single space.
-                    let titleCaseValue = titleCaseWords.join(' ');
-
-                    // 5. Preserve trailing space from original input if the user just typed it.
-                    // This is critical for typing: "John" -> space -> "Mark"
-                    if (originalValue.endsWith(' ') && originalValue.trim() !== '') {
-                        titleCaseValue += ' ';
-                    }
-
-                    // 6. Update the input field only if the value is different.
-                    if (currentInput.value !== titleCaseValue) {
-                        // Preserve the cursor position if the change is internal (e.g., just changing case)
-                        const cursorPosition = currentInput.selectionStart;
-                        currentInput.value = titleCaseValue;
-                        currentInput.setSelectionRange(cursorPosition, cursorPosition);
-                    }
-                });
-            });
-        });
-    </script>
 @endsection
