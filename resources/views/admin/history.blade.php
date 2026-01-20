@@ -61,7 +61,7 @@
                                     <th>Date</th>
                                     <th>Name</th>
                                     <th>Action</th>
-                                    <th>Description</th>
+                                    <th>Student ID</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,7 +83,7 @@
                                     <th>Date</th>
                                     <th>Name</th>
                                     <th>Action</th>
-                                    <th>Description</th>
+                                    <th>Student ID</th>
                                 </tr>
                             </tfoot>
                         </table>

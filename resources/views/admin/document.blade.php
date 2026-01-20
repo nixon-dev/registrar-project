@@ -39,9 +39,8 @@
                                 <tr>
                                     <th class="wp-10">Request Date</th>
                                     <th class="wp-10">Student ID</th>
-                                    <th class="wp-20">Name</th>
-                                    <th class="wp-15">Type of Request</th>
-                                    <th class="wp-20">Purpose</th>
+                                    <th class="wp-35">Name</th>
+                                    <th class="wp-20">Type of Request</th>
                                     <th class="wp-10">By</th>
                                     <th class="wp-15 text-center">Status</th>
                                     <th class="wp-20 text-center">View</th>
@@ -54,7 +53,6 @@
                                         <td> @shorten($d->student_id, 50) </td>
                                         <td> {{ $d->last_name }}, {{ $d->first_name }} {{ $d->middle_name }} </td>
                                         <td> {{ $d->request_type }} </td>
-                                        <td> {{ $d->purpose }} </td>
 
                                         <td> {{ $d->username }} </td>
                                         <td class="text-center font-bold">
@@ -76,7 +74,6 @@
                                     <th class="wp-10">Student ID</th>
                                     <th class="wp-20">Name</th>
                                     <th class="wp-15">Type of Request</th>
-                                    <th class="wp-20">Purpose</th>
                                     <th class="wp-10">By</th>
                                     <th class="wp-15 text-center">Status</th>
                                     <th class="wp-20 text-center">View</th>
@@ -105,7 +102,7 @@
                                         readonly>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group d-none">
                                     <label>Request Date</label>
                                     <input type="date" name="request_date" value="{{ date('Y-m-d') }}" class="form-control"
                                         onfocus="this.showPicker()">
@@ -170,19 +167,6 @@
                                                 class="form-control">
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>OR Number</label>
-                                    <input type="text" name="or_number" placeholder="" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>OR Date</label>
-                                    <input type="date" name="or_date" class="form-control" onfocus="this.showPicker()">
-                                </div>
-                                <div class="form-group">
-                                    <label>Purpose</label>
-                                    <input type="text" name="purpose" placeholder="" class="form-control ">
                                 </div>
                                 <div class="form-group">
                                     <label>Status</label>

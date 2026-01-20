@@ -135,7 +135,7 @@ class AdminController extends Controller
     {
 
 
-        $data = Document::orderBy('request_date', 'DESC')
+        $data = Document::orderBy('created_at', 'DESC')
             ->leftJoin('users', 'users.id', '=', 'document_request.admin_id')
             ->select('document_request.*', 'users.username')
             ->orderBy('document_request.request_date', 'desc')
