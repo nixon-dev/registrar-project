@@ -8,7 +8,8 @@
     <link rel="icon" type="image/ico" href="{{ asset('img/favicon.ico') }}">
     <title> @yield('title', 'Registrar Office (QSU)')</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     @vite(['resources/css/app.css'])
 
@@ -16,16 +17,16 @@
 </head>
 
 <body class="dark-skin-2">
-    <div class="loginColumns animated fadeInDown" style="margin-top: -80px;">
-        <div class="row">
-            <div class="col-sm-12 d-flex justify-content-center mb-2">
+    <div class="loginColumns " style="margin-top: -80px;">
+        <div class="row" >
+            <div class="col-sm-12 d-flex justify-content-center mb-2 animated fadeInDown">
                 <img id="qsulogo" src="{{ asset('img/logo/QSU.png') }}"
-                    style="width: 150px; height: auto; object-fit: cover;" />
+                    style="width: 150px; height: auto; object-fit: cover;" loading="lazy"/>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 animated fadeIn">
                 @include('components.alert')
             </div>
-            <div class="col-sm-12 text-white text-center">
+            <div class="col-sm-12 text-white text-center animated fadeInDown">
                 <h2 class="font-bold">Registrar Document Request</h2>
                 <p>Track your requests via School ID</p>
             </div>
@@ -37,19 +38,12 @@
                 <div class="text-white pull-left">
                     <small>© QSU - Registrar Office</small>
                 </div>
-                <div class="pull-right text-white">
-                    <small class="pull-right">/nixon-dev</small>
-                </div>
             </div>
         </div>
     </div>
 
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js ') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('js/inspinia.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.js') }}" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const logoElement = document.getElementById('qsulogo');

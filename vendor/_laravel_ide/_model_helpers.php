@@ -277,19 +277,22 @@ namespace App\Models {
      * @property \Illuminate\Support\Carbon $updated_at
      * @property string|null $remarks
      * @property string $status
-     * @property string|null $purpose
      * @property string $request_type
-     * @property string|null $or_date
-     * @property string|null $or_number
      * @property string|null $year_graduated
      * @property string $course
      * @property string|null $middle_name
      * @property string $first_name
      * @property string $last_name
      * @property string $student_id
-     * @property string $request_date
+     * @property \Illuminate\Support\Carbon $request_date
      * @property mixed $admin_id
      * @property int $dr_id
+     * @property-read mixed $fullname
+     * @property-read mixed $short_fullname
+     * @property-read mixed $request_icon
+     * @property-read mixed $status_label
+     * @property-read mixed $status_icon
+     * @property-read \App\Models\User $admin
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereDrId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereAdminId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereRequestDate($value)
@@ -299,10 +302,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereMiddleName($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereCourse($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereYearGraduated($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereOrNumber($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereOrDate($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereRequestType($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document wherePurpose($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereStatus($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereRemarks($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Document>|Document whereUpdatedAt($value)
@@ -1348,8 +1348,6 @@ namespace App\Models {
      * @property string|null $remember_token
      * @property string $role
      * @property string $password
-     * @property \Illuminate\Support\Carbon|null $email_verified_at
-     * @property string $email
      * @property string $name
      * @property string|null $username
      * @property int $id
@@ -1358,8 +1356,6 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereUsername($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereEmail($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereEmailVerifiedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User wherePassword($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereRole($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereRememberToken($value)

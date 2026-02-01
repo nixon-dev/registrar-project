@@ -108,12 +108,12 @@
 
         $(document).ready(function () {
             $('.dataTables-example').DataTable({
-                pageLength: 10,
+                pageLength: 50,
                 order: [],
                 responsive: true,
                 initComplete: function () {
                     this.api()
-                        .columns([2, 1])
+                        .columns([])
                         .every(function () {
                             var column = this;
 

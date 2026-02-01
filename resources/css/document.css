@@ -1,0 +1,186 @@
+.doc-view-card {
+    background: #0f1115;
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.dashboard-card {
+    background: #faf5ff;
+    padding: 1.5rem;
+}
+
+.lavander-whip {
+    background: #faf5ff;
+}
+
+.page-heading {
+    background: #faf5ff;
+}
+
+.breadcrumb {
+    background: #faf5ff;
+}
+
+/* Header */
+.doc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.doc-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.doc-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: #78f211;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.doc-icon i {
+    font-size: 1.8rem;
+    color: #000000;
+}
+
+/* Name */
+.doc-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.doc-sub {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+/* Info grid */
+.doc-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.doc-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #9ca3af;
+    margin-bottom: 0.2rem;
+}
+
+.doc-value {
+    font-size: 0.95rem;
+    color: #e5e7eb;
+    font-weight: 500;
+}
+
+/* Remarks */
+.doc-remarks {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+#documentTable thead th {
+    background: #f8fafc;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #374151;
+}
+
+#documentTable tfoot th {
+    background: #f8fafc;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #374151;
+}
+
+
+#documentTable {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#documentTable td,
+#documentTable th {
+    padding: 0.75rem;
+}
+
+.bulk-actions {
+    position: sticky;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    padding: 0.7rem 0.9rem;
+    background: #ffffff;
+    
+    width: fit-content;
+
+    animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(12px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.bulk-actions .form-select {
+    min-width: 160px;
+}
+
+
+.bulk-select {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.bulk-select i {
+    position: absolute;
+    left: 10px;
+    color: #000000;
+    font-size: 1.1rem;
+}
+
+.bulk-select select {
+    appearance: none;
+    padding: 0.45rem 3rem 0.45rem 2rem;
+    border: 1px solid #d1d5db;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.bulk-select select:focus {
+    outline: none;
+    border-color: #9121fe;
+    background: #ffffff;
+}
+
+

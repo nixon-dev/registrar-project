@@ -8,6 +8,7 @@ use App\Models\Co;
 use App\Models\PendingDocx;
 use App\Models\Sessions;
 use Auth;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Document;
@@ -22,6 +23,7 @@ use Illuminate\Database\QueryException;
 use App\Traits\RecordHistory;
 use Illuminate\Support\Facades\Storage;
 use Session;
+use Yajra\DataTables\Facades\DataTables;
 
 
 class AdminController extends Controller
@@ -31,61 +33,53 @@ class AdminController extends Controller
     public function index()
     {
 
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
-        $lastMonth = Carbon::now()->subMonth()->month;
+        $now = Carbon::now();
 
-
-        $thisMonthDocumentCount = Document::whereMonth('created_at', $currentMonth)
-            ->whereYear('created_at', $currentYear)
-            ->count();
-        $lastMonthDocumentCount = Document::whereMonth('created_at', $lastMonth)
-            ->whereYear('created_at', $currentYear)
+        $thisMonthDocumentCount = Document::whereMonth('created_at', $now->month)
+            ->whereYear('created_at', $now->year)
             ->count();
 
-        $pendingCount = Document::where('status', 'Pending')
+        $lastMonth = $now->copy()->subMonth();
+
+        $lastMonthDocumentCount = Document::whereMonth('created_at', $lastMonth->month)
+            ->whereYear('created_at', $lastMonth->year)
             ->count();
+        $statusCounts = Document::selectRaw('status, COUNT(*) as total')
+            ->groupBy('status')
+            ->pluck('total', 'status');
+        $pendingCount = $statusCounts['Pending'] ?? 0;
+        $approvedCount = $statusCounts['Processing'] ?? 0;
+        $deniedCount = $statusCounts['Ready for Pickup'] ?? 0;
 
-        $approvedCount = Document::where('status', 'For Signing')
-            ->count();
-
-        $deniedCount = Document::where('status', 'For Release')
-            ->count();
-
-        $documents = Document::orderBy('created_at', 'DESC')->take(5)->get();
-
+        $documents = Document::latest()->limit(5)->get(['dr_id', 'last_name', 'first_name', 'middle_name', 'request_type', 'created_at']);
 
         $userCount = User::where('role', '!=', 'Guest')->count();
         $activeUserCount = Sessions::where('last_activity', '>', Carbon::now()->subMinute(10)->getTimestamp())->count();
 
         $rawData = Document::selectRaw("
-    date_format(document_request.request_date, '%Y-%m-%d') as full_date,
-    date_format(document_request.request_date, '%b %d') as month_day,
-    request_type,
-    count(*) as aggregate
-")
-            ->whereDate('document_request.request_date', '>=', now()->subYear())
+            date_format(document_request.request_date, '%Y-%m-%d') as full_date,
+            date_format(document_request.request_date, '%b %d') as month_day,
+            request_type,
+            count(*) as aggregate
+            ")
+            ->whereDate('document_request.request_date', '>=', now()->subMonth())
             ->groupByRaw("date_format(document_request.request_date, '%Y-%m-%d'), date_format(document_request.request_date, '%b %d'), request_type")
             ->get();
-
         $allDates = $rawData->pluck('full_date')
             ->unique()
             ->sortBy(fn($date) => \Carbon\Carbon::parse($date))
             ->values();
         $chartLabels = $allDates->map(fn($date) => $rawData->where('full_date', $date)->first()->month_day)->toArray();
-
         $requestTypes = $rawData->pluck('request_type')->unique();
-
         $chartDatasets = [];
         $colors = [
-            '#f84a65',
-            '#4e73df',
+            '#5851d5',
+            '#1c1c1c',
             '#1cc88a',
             '#f6c23e',
             '#36b9cc'
         ];
         $colorIndex = 0;
-
         foreach ($requestTypes as $type) {
             $dataPoints = [];
             $currentColor = $colors[$colorIndex % count($colors)];
@@ -98,7 +92,6 @@ class AdminController extends Controller
 
                 $dataPoints[] = $count ?? 0;
             }
-
             $chartDatasets[] = [
                 'label' => $type,
                 'backgroundColor' => $currentColor . '30',
@@ -109,22 +102,11 @@ class AdminController extends Controller
 
             $colorIndex++;
         }
-
         $chartData = [
             'labels' => $chartLabels,
             'datasets' => $chartDatasets,
         ];
-
-        $activeUsers = Sessions::where('last_activity', '>', Carbon::now()->subMinute(10)->getTimestamp())
-            ->leftJoin('users', 'users.id', '=', 'sessions.user_id')
-            ->orderBy('last_activity', 'desc')
-            ->get();
-
-
-        $logs = ActivityLog::orderBy('created_at', 'DESC')->take(10)->get();
-
-
-        return view('admin.index', compact('thisMonthDocumentCount', 'lastMonthDocumentCount', 'userCount', 'activeUserCount', 'logs', 'chartData', 'pendingCount', 'deniedCount', 'approvedCount', 'documents', 'activeUsers'));
+        return view('admin.index', compact('thisMonthDocumentCount', 'lastMonthDocumentCount', 'userCount', 'activeUserCount', 'chartData', 'pendingCount', 'deniedCount', 'approvedCount', 'documents'));
     }
 
 
@@ -133,8 +115,6 @@ class AdminController extends Controller
 
     public function document_tracking()
     {
-
-
         $data = Document::orderBy('created_at', 'DESC')
             ->leftJoin('users', 'users.id', '=', 'document_request.admin_id')
             ->select('document_request.*', 'users.username')
@@ -172,9 +152,6 @@ class AdminController extends Controller
             'middle_name' => 'nullable|string',
             'course' => 'required|string',
             'year_graduated' => 'nullable|string',
-            'or_number' => 'nullable|string',
-            'or_date' => 'nullable|date',
-            'purpose' => 'nullable|string',
             'status' => 'nullable|string',
         ]);
 
@@ -182,7 +159,7 @@ class AdminController extends Controller
         try {
             $document = Document::create([
                 'admin_id' => $request->admin_id,
-                'request_date' => $request->request_date,
+                'request_date' => Carbon::now(),
                 'request_type' => $request->request_type,
                 'student_id' => $request->student_id,
                 'last_name' => $request->last_name,
@@ -190,9 +167,6 @@ class AdminController extends Controller
                 'middle_name' => $request->middle_name,
                 'course' => $request->course,
                 'year_graduated' => $request->year_graduated,
-                'or_number' => $request->or_number,
-                'or_date' => $request->or_date,
-                'purpose' => $request->purpose,
                 'status' => $request->status,
             ]);
 
@@ -208,19 +182,18 @@ class AdminController extends Controller
 
     }
 
-    public function document_request_update(Request $request)
+    public function document_request_update(Request $request, $id)
     {
 
         $request->validate([
-            'dr_id' => 'required|numeric',
             'status' => 'required|string',
             'remarks' => 'nullable|string|max:255',
         ]);
 
-        $query = Document::where('dr_id', $request->dr_id)->update(['status' => $request->status, 'remarks' => $request->remarks]);
+        $query = Document::where('dr_id', $id)->update(['status' => $request->status, 'remarks' => $request->remarks]);
 
-        $student_id = Document::where('dr_id', $request->dr_id)->value('student_id');
-        
+        $student_id = Document::where('dr_id', $id)->value('student_id');
+
         $this->recordHistory('Updated Status for', $student_id);
 
 
@@ -297,6 +270,39 @@ class AdminController extends Controller
         }
     }
 
+    public function user_create(Request $request)
+    {
+
+        $request->validate([
+            'username' => 'required|string|max:255|unique:users',
+            'name' => 'required|string|max:30',
+            'password' => 'required|string|min:4',
+        ], [
+            'username.unique' => 'This username is already taken.',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'role' => User::role_admin,
+        ]);
+
+        if ($user) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User created successfully!',
+                'redirect' => route('admin.users-list'),
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: User creation failed!',
+            ]);
+        }
+
+    }
+
     public function users_delete($id)
     {
         $query = User::where('id', $id)->delete();
@@ -314,7 +320,7 @@ class AdminController extends Controller
 
     public function history(Request $request)
     {
-        $activities = ActivityLog::orderBy('created_at', 'desc')->get();
+        $activities = ActivityLog::orderBy('created_at', 'desc')->limit(150)->get(['created_at', 'history_name', 'history_action', 'history_description']);
         return view('admin.history', compact('activities'));
     }
 
@@ -328,196 +334,66 @@ class AdminController extends Controller
     }
 
 
-    // Units Functions
 
-    public function units()
-    {
-        $units = Units::orderBy('unit_name', 'ASC')->get();
-
-        return view('admin.units', compact('units'));
-    }
-
-
-
-    public function units_add(Request $request)
-    {
-        $request->validate([
-            'unit_name' => 'required|string',
-        ]);
-        $query = Units::insert([
-            'unit_name' => $request->unit_name,
-        ]);
-        if ($query) {
-            return back()->with('success', 'Unit added successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed to add unit.');
-        }
-    }
-
-    public function units_edit(Request $request)
-    {
-        $request->validate([
-            'unit_id' => 'required|numeric',
-            'unit_name' => 'required|string',
-        ]);
-
-        $query = Units::where('unit_id', $request->unit_id)
-            ->update([
-                'unit_name' => $request->unit_name,
-            ]);
-        if ($query) {
-            return back()->with('success', 'Unit edited successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed to edit unit.');
-        }
-    }
-
-    public function units_delete($id)
-    {
-
-        $query = Units::where('unit_id', $id)->delete();
-
-        if ($query) {
-            return back()->with('success', 'Unit deleted successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed to delete unit.');
-        }
-    }
-
-    // Account Settings
 
     public function account_settings()
     {
         return view('admin.settings.account');
     }
 
-    // Settings
 
-
-
-    // Maintenance & Other Operating Expenses
-    public function mooe_list()
+    public function documentsData()
     {
-        $mooes = Mooe::orderBy('name', 'ASC')->get();
+        $documents = Document::orderBy('created_at', 'desc');
 
-        return view('admin.settings.mooe', compact('mooes'));
+        return DataTables::of($documents)
+            ->addColumn('username', function ($d) {
+                return $d->admin->username ?? '';
+            })
+            ->addColumn('created_at', function ($d) {
+                return $d->created_at;
+            })
+            ->addColumn('view', function ($d) {
+                return '<a href="' . route('admin.document-view', ['id' => $d->dr_id]) . '" 
+                    class="btn btn-primary btn-sm">
+                        <i class="bi bi-eye text-white"></i>
+                    </a>';
+            })
+            ->editColumn('created_at', function ($d) {
+                return $d->request_date->format('M d, Y');
+            })
+            ->filterColumn('fullname', function ($query, $keyword) {
+                $query->whereRaw(
+                    "CONCAT(last_name,' ',first_name,' ',middle_name) like ?",
+                    ["%{$keyword}%"]
+                );
+            })
+            ->addColumn('cbt', function ($d) {
+                return '<input type="checkbox"
+                    class="row-checkbox"
+                    value="' . $d->dr_id . '">';
+            })
+            ->rawColumns(['view', 'cbt'])
+            ->make(true);
     }
 
-    public function mooe_add(Request $request)
-    {
-        $request->validate([
-            'code' => 'required',
-            'name' => 'required|string',
-        ]);
-
-        $checkCode = Mooe::where('code', $request->code)->first();
-
-        if ($checkCode) {
-            return back()->with('error', 'Error: Code already exists!');
-        }
-
-        $query = Mooe::insert([
-            'code' => $request->code,
-            'name' => $request->name,
-        ]);
-
-        if ($query) {
-            return back()->with('success', 'MOOE inserted successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed inserting MOOE');
-        }
-    }
-
-    public function mooe_edit(Request $request)
-    {
-        $request->validate([
-            'code' => 'required',
-            'name' => 'required|string',
-        ]);
-
-        $query = Mooe::where('code', $request->code)
-            ->update([
-                'name' => $request->name,
-            ]);
-
-        if ($query) {
-            return back()->with('success', 'MOOE updated successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed updating MOOE');
-        }
-    }
-
-    public function mooe_delete($code)
-    {
-        $query = Mooe::where('code', $code)->delete();
-
-        if ($query) {
-            return back()->with('success', 'MOOE deleted successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed deleting MOOE');
-        }
-    }
-
-    // Capital Outlay Functions
-    public function co_list()
-    {
-        $co = Co::orderBy('name', 'ASC')->get();
-
-        return view('admin.settings.co', compact('co'));
-    }
-
-    public function co_add(Request $request)
+    public function bulkUpdate(Request $request)
     {
         $request->validate([
-            'code' => 'required',
-            'name' => 'required|string',
+            'ids' => 'required|array',
+            'status' => 'required|string'
         ]);
 
-        $checkCode = Co::where('code', $request->code)->first();
+        Document::whereIn('dr_id', $request->ids)
+            ->update(['status' => $request->status]);
 
-        if ($checkCode) {
-            return back()->with('error', 'Error: Code already exists!');
-        }
-
-        $query = Co::insert([
-            'code' => $request->code,
-            'name' => $request->name,
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated successfully!'
         ]);
-
-        if ($query) {
-            return back()->with('success', 'Capital Outlay inserted successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed inserting Capital Outlay');
-        }
     }
 
-    public function co_edit(Request $request)
-    {
-        $request->validate([
-            'code' => 'required',
-            'name' => 'required|string',
-        ]);
 
-        $query = Co::where('code', $request->code)
-            ->update([
-                'name' => $request->name,
-            ]);
 
-        if ($query) {
-            return back()->with('success', 'Capital Outlay updated successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed updating Capital Outlay');
-        }
-    }
 
-    public function co_delete($code)
-    {
-        $query = Co::where('code', $code)->delete();
-
-        if ($query) {
-            return back()->with('success', 'Capital Outlay deleted successfully!');
-        } else {
-            return back()->with('error', 'Error: Failed deleting Capital Outlay');
-        }
-    }
 }

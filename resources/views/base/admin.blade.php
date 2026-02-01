@@ -8,19 +8,18 @@
     <link rel="icon" type="image/ico" href="{{ asset('img/favicon.ico') }}">
     <title> @yield('title', 'Registrar Office (QSU)')</title>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js"></script>
     @vite(['resources/css/app.css'])
     @yield('css')
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('js/inspinia.js') }}"></script>
-    <script src="{{ asset('js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}" defer></script>
+    <script src="{{ asset('js/bootstrap.js') }}" defer></script>
+    <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}" defer></script>
+    <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}" defer></script>
+    <script src="{{ asset('js/inspinia.js') }}" defer></script>
 </head>
 
 <body class="fixed-sidebar">
@@ -40,21 +39,22 @@
                         </div>
                     </li>
                     <li class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">
-                        <a href="{{ route('admin.index') }}" class="text-white"><i class="fa fa-pie-chart"></i>
+                        <a href="{{ route('admin.index') }}" class="text-white"><i class="bi bi-grid-1x2"></i>
                             <span class="nav-label">Dashboard</span> </a>
                     </li>
                     <li class="{{ request()->routeIs('admin.document') ? 'active' : '' }}">
-                        <a href="{{ route('admin.document') }}" class="text-white"><i class="fa fa-file-text "></i>
+                        <a href="{{ route('admin.document') }}" class="text-white"><i
+                                class="bi-file-earmark-text "></i>
                             <span class="nav-label">Request Documents</span></a>
                     </li>
                     <li class="{{ request()->routeIs('admin.users-list') ? 'active' : '' }}">
-                        <a href="{{ route('admin.users-list') }}" class="text-white"><i class="fa fa-users"></i>
+                        <a href="{{ route('admin.users-list') }}" class="text-white"><i class="bi bi-people"></i>
                             <span class="nav-label">Users</span></a>
                     </li>
                     <li class="{{ request()->routeIs(['admin.new-settings', 'admin.history']) ? 'active' : '' }}">
-                        <a href="#" aria-expanded="false" class="text-white"><i class="fa fa-gear"
+                        <a href="#" aria-expanded="false" class="text-white"><i class="bi-gear"
                                 aria-hidden="true"></i>
-                            <span class="nav-label">Settings</span><span class="fa arrow" aria-hidden="true"></span></a>
+                            <span class="nav-label">Settings</span></a>
                         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
 
                             <li class={{ request()->routeIs('admin.new-settings') ? 'active' : '' }}><a
@@ -72,12 +72,12 @@
                 <nav class="navbar navbar-static-top dark-skin" role="navigation">
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-success" href="#"><i
-                                class="fa fa-bars"></i></a>
+                                class="bi bi-list-nested"></i></a>
                     </div>
                     <ul class="nav navbar-top-links navbar-right ">
                         <li>
                             <a href="{{ route('logout') }}" class="text-white">
-                                <i class="fa fa-sign-out"></i> Log out
+                                <i class="bi bi-power"></i> Log out &nbsp;
                             </a>
                         </li>
                     </ul>
