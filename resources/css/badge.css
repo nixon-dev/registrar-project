@@ -1,0 +1,128 @@
+.request_bg {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 9px; 
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
+    background-color: #fff;
+    color: #000;
+}
+
+/* Status colors */
+.status-success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+}
+
+.status-info {
+    background: linear-gradient(135deg, #4aa2ea, #6946f4);
+    color: #fff;
+}
+
+.status-warning {
+    background: linear-gradient(135deg, #c6872e, #cc7b0a);
+    color: #4b0f0f;
+}
+
+.status-primary {
+    background: linear-gradient(135deg, #daeb5d, #dfe30a);
+    color: #000000;
+}
+
+/* Icon sizing */
+.status-pill i {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* Card */
+.doc-card {
+    background: #0f1115;
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+/* Header layout */
+.doc-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Left section */
+.doc-left {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+/* Request icon */
+.request-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #78f211;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.request-icon i {
+    font-size: 1.4rem;
+    color: #000000;
+}
+
+/* Title */
+.doc-title .h4 {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Body */
+.doc-card-body {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: #e5e7eb;
+    font-size: 0.95rem;
+}
+
+/* Status pill (reusing your previous style) */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.status-success {
+    animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.doc-card-body span {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

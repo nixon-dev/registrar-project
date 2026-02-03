@@ -36,7 +36,7 @@
                         <li class="nav-item" ><a class="nav-link active" data-toggle="tab" href="#users-pending"
                                 aria-expanded="true">Users</a></li>
                         <li class="nav-item" ><a class="nav-link" data-toggle="tab" href="#users-list"
-                                aria-expanded="false">Pending Users</a></li>
+                                aria-expanded="false">Create User</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="users-pending" class="tab-pane fade show active">
@@ -46,7 +46,7 @@
                         </div>
                         <div id="users-list" class="tab-pane fade">
                             <div class="panel-body">
-                                @include('admin.settings.components.users-pending')
+                                @include('admin.settings.components.users-create')
                             </div>
                         </div>
                     </div>

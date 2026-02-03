@@ -18,7 +18,7 @@
                 <td> {{ $ul->role }} </td>
                 <td class="text-center">
                     <a href="{{ route('admin.users-view', ['id' => $ul->id]) }}" class="btn btn-primary btn-sm">
-                        <i class="fa fa-eye"></i>
+                        <i class="bi bi-eye"></i>
                     </a>
                 </td>
             </tr>

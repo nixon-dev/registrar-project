@@ -19,17 +19,22 @@ class RoleMiddleware
     //     return $next($request);
     // }
 
+
     public function handle(Request $request, Closure $next, $role)
     {
-        if (Auth::check() && Auth::user()->role === $role) {
-
-            return $next($request);
+        if (!Auth::check()) {
+            return redirect()->route('home')->with('error', 'You are not authorized to access this page.');
         }
 
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/login')->with('error', "Access Denied.");
+        if (Auth::user()->role !== $role) {
+            return redirect()
+                ->route('home')
+                ->with('error', 'You are not authorized to access this page.');
+
+        }
+
+        return $next($request);
     }
+
 
 }

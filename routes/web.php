@@ -12,19 +12,19 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [GuestController::class,'index'])->name('home');
 
-Route::post('/check', [GuestController::class,'checker'])->name('checker');
+Route::get('/check', [GuestController::class,'checker'])->middleware('throttle:100,1')->name('checker');
 
-Route::get('/z3t8qPjL6sA5hWk2rY7e', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/z3t8qPjL6sA5hWk2rY7e', [LoginController::class, 'login']);
+Route::get('/registrar-admin', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/registrar-admin', [LoginController::class, 'login']);
 
 Route::get('/hjkmqladasgq', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/hjkmqladasgq', [RegisterController::class, 'register']);
 
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
-});
+// Route::fallback(function () {
+//     return response()->view('errors.404', [], 404);
+// });
 
 
 require __DIR__ . '/admin.php';

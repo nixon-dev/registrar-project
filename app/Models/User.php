@@ -12,6 +12,8 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    const role_admin = 'Administrator';
+
     protected $table = 'users';
 
 
@@ -25,6 +27,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -36,6 +39,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+
 
     /**
      * Get the attributes that should be cast.

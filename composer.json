@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.10.1",
         "phpoffice/phpword": "^1.3",
         "twbs/bootstrap": "^5.3",
-        "vish4395/laravel-file-viewer": "^1.0"
+        "vish4395/laravel-file-viewer": "^1.0",
+        "yajra/laravel-datatables": "^12.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

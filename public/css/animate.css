@@ -111,9 +111,9 @@
     }
 
     50% {
-        -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-        transform: scale(1.1);
+        -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05);
     }
 
     100% {
@@ -126,6 +126,10 @@
 .pulse {
     -webkit-animation-name: pulse;
     animation-name: pulse;
+    animation-delay: 2s;
+    animation-duration: 1s;
+    animation-iteration-count: 3;
+    
 }
 
 @-webkit-keyframes rubberBand {
@@ -1004,6 +1008,7 @@
 .fadeIn {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
+    animation-delay: 0.5s;
 }
 
 @-webkit-keyframes fadeInDown {

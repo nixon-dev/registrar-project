@@ -4,7 +4,7 @@ use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
-Route::middleware(['auth', 'role:Administrator'])->prefix('dioikitis')->group(function () {
+Route::middleware(['auth', 'role:Administrator'])->prefix('admin')->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.index');
 
@@ -14,7 +14,9 @@ Route::middleware(['auth', 'role:Administrator'])->prefix('dioikitis')->group(fu
 
     Route::post('/document-tracking/add', [AdminController::class, 'document_request_add'])->name('admin.document-add-request');
 
-    Route::post('/document-tracking/update', [AdminController::class, 'document_request_update'])->name('admin.document-update-request');
+    Route::post('/document-tracking/update/{id}', [AdminController::class, 'document_request_update'])->name('admin.document-update-request');
+
+    Route::post('/documents/bulk-update', [AdminController::class, 'bulkUpdate'])->name('admin.documents.bulkUpdate');
 
     Route::get('/user-settings', [AdminController::class, 'user_settings'])->name('admin.user-settings');
 
@@ -25,6 +27,8 @@ Route::middleware(['auth', 'role:Administrator'])->prefix('dioikitis')->group(fu
     Route::get('/users/{id}', [AdminController::class, 'view_users'])->name('admin.users-view');
 
     Route::post('/users/update', [AdminController::class, 'users_update'])->name('admin.users-update');
+    
+    Route::post('/users/create', [AdminController::class, 'user_create'])->name('admin.user-create');
 
     Route::post('/user/update', [AdminController::class, 'user_update'])->name('admin.user-update');
 
@@ -39,4 +43,7 @@ Route::middleware(['auth', 'role:Administrator'])->prefix('dioikitis')->group(fu
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
 
     Route::get('/account-settings', [AdminController::class, 'account_settings'])->name('admin.new-settings');
+
+    Route::get('/admin/documents-data', [AdminController::class, 'documentsData'])->name('admin.documents.data');
+
 });

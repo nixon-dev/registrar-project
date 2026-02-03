@@ -9,24 +9,30 @@ class GuestController extends Controller
 {
     public function index()
     {
-
         return view("guest.index");
     }
 
     public function checker(Request $request)
     {
-
         $request->validate([
-            'student_id' => 'required|string',
+            'student_id' => 'required|string|max:10',
         ]);
 
-        $data = Document::where('student_id', $request->student_id)->get();
+        $studentId = trim($request->student_id);
 
-        if (!$data) {
-            return redirect()->route('home')->with('error', 'Error: No Document Found');
+        $data = Document::where('student_id', $studentId)
+            ->select('request_date', 'status', 'request_type', 'remarks', 'updated_at', 'student_id')
+            ->orderBy('request_date', 'desc')
+            ->get();
+
+        if ($data->isEmpty()) {
+            return redirect()
+                ->route('home')
+                ->with('error', 'No document found for this Student ID.');
         }
-        
-        return view('guest.result', compact('data'));
+
+        return view('guest.result', compact('data', 'studentId'));
 
     }
+
 }
