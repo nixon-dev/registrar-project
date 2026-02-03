@@ -7,8 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/ico" href="{{ asset('img/favicon.ico') }}">
     <title> @yield('title', 'Registrar Office (QSU)')</title>
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.min.css">
@@ -125,7 +123,6 @@
     <script src="{{ asset('js/popper.min.js') }}" defer></script>
     <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}" defer></script>
     <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}" defer></script>
-    <script src="{{ asset('js/inspinia.js') }}" defer></script>
     @vite('resources/js/app.js')
     @yield('script')
 </body>

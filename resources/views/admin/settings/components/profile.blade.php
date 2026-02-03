@@ -1,16 +1,12 @@
 <form method="POST" id="user-update">
     @csrf()
-    <div class="form-group d-none">
-        <label>ID</label>
-        <input type="number" name="id" value="{{ Auth::user()->id ?? '' }}" class="form-control" readonly>
-    </div>
-    <div class="form-group">
+     <div class="form-group">
         <label>Name</label>
         <input type="text" name="name" value="{{ Auth::user()->name ?? '' }}" class="form-control" required>
     </div>
     <div class="form-group">
-        <label>Email</label>
-        <input type="text" name="email" value="{{ Auth::user()->email ?? '' }}" class="form-control" readonly>
+        <label>Username</label>
+        <input type="text" name="username" value="{{ Auth::user()->username ?? '' }}" class="form-control" >
     </div>
     <div class="form-group">
         <label>Role</label>

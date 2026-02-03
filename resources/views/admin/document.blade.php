@@ -39,7 +39,8 @@
                                 <span class="bulk-count"></span>
                                 <div class="bulk-select">
                                     <i class="bi bi-arrow-repeat"></i>
-                                    <select id="bulk-status" data-bulk-url="{{ route('admin.documents.bulkUpdate') }}"
+                        
+                                    <select id="bulk-status" class="form-control" data-bulk-url="{{ route('admin.documents.bulkUpdate') }}"
                                         data-bulk-csrf="{{ csrf_token() }}">
                                         <option value="" selected disabled>Change status…</option>
                                         <option value="Pending">Pending</option>
@@ -93,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div id="modal-form" class="modal fade" aria-hidden="true">
+    <div id="modal-form" class="animated modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -119,9 +120,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <div class="form-group">
+                                        <div class="form-group ">
                                             <label>Student ID *</label>
-                                            <input type="text" name="student_id" placeholder="" class="form-control"
+                                            <input type="text" name="student_id" placeholder="" class="form-control "
                                                 required>
                                         </div>
                                     </div>

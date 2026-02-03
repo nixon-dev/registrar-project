@@ -251,23 +251,18 @@ class AdminController extends Controller
     public function user_update(Request $request)
     {
         $request->validate([
-            'id' => 'required|numeric',
+            'username' => 'required|string|min:3|max:25|unique:users,username,' . Auth::id(),
             'name' => 'required|string',
         ]);
 
-        $query = User::where('id', $request->id)->update(['name' => $request->name]);
+        $query = User::where('id', Auth::id())->update(['name' => $request->name, 'username' => $request->username]);
 
-        if ($query) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Personal information updated successfully!',
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error: Update Failed',
-            ]);
-        }
+        return response()->json([
+            'success' => (bool) $query,
+            'message' => $query
+                ? 'Personal information updated successfully!'
+                : 'No changes were made.',
+        ]);
     }
 
     public function user_create(Request $request)
@@ -288,18 +283,12 @@ class AdminController extends Controller
             'role' => User::role_admin,
         ]);
 
-        if ($user) {
-            return response()->json([
-                'success' => true,
-                'message' => 'User created successfully!',
-                'redirect' => route('admin.users-list'),
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error: User creation failed!',
-            ]);
-        }
+        return response()->json([
+            'success' => (bool) $user,
+            'message' => $user
+                ? 'User created successfully!'
+                : 'Error: User creation failed.',
+        ]);
 
     }
 
@@ -313,8 +302,6 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Error: Failed to Delete User');
         }
     }
-
-
 
 
 
@@ -387,16 +374,14 @@ class AdminController extends Controller
             'status' => 'required|string'
         ]);
 
-        Document::whereIn('dr_id', $request->ids)
+        $query = Document::whereIn('dr_id', $request->ids)
             ->update(['status' => $request->status]);
 
         return response()->json([
-            'success' => true,
-            'message' => 'Status updated successfully!'
+            'success' => (bool) $query,
+            'message' => $query
+                ? 'Status updated successfully!'
+                : 'Error: Failed to update status.',
         ]);
     }
-
-
-
-
 }

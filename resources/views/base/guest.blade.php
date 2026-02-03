@@ -6,8 +6,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/ico" href="{{ asset('img/favicon.ico') }}">
     <title> @yield('title', 'Registrar Office (QSU)')</title>
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     @vite(['resources/css/app.css'])
     @yield('head')
 </head>

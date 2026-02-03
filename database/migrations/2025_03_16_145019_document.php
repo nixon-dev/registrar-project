@@ -10,37 +10,28 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('document', function (Blueprint $table) {
-            $table->id('document_id');
-            $table->string('document_title');
-            $table->integer('document_origin');
-            $table->string('document_nature');
-            $table->integer('document_number');
-            $table->date('document_deadline')->nullable();
-            $table->string('pr')->default('false');
-            $table->string('canvass')->default('false');
-            $table->string('abstract')->default('false');
-            $table->string('obr')->default('false');
-            $table->string('po')->default('false');
-            $table->string('par')->default('false');
-            $table->string('air')->default('false');
-            $table->string('dv')->default('false');
-            $table->integer('amount')->default('0');
+        Schema::create('document_request', function (Blueprint $table) {
+            $table->id('dr_id');
+            $table->integer('admin_id');
+            $table->date('request_date');
+            $table->string('request_type');
+            $table->string('student_id');
+            $table->string('last_name');
+            $table->string('first_name');
+            $table->string('middle_name')->nullable();
+            $table->string('course')->nullable();
+            $table->string('year_graduated')->nullable();
+            $table->string('status')->default('Processing');
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
 
         Schema::create('history', function (Blueprint $table) {
             $table->id('history_id');
-            $table->integer('document_id');
             $table->string('history_name');
-            $table->date('history_date');
             $table->string('history_action');
+            $table->text('history_description');
             $table->timestamps();
-        });
-
-        Schema::create('office', function (Blueprint $table) {
-            $table->id('office_id');
-            $table->string('office_name');
         });
     }
 
@@ -49,8 +40,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('document');
+        Schema::dropIfExists('document_request');
         Schema::dropIfExists('history');
-        Schema::dropIfExists('office');
     }
 };

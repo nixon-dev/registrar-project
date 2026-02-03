@@ -68,12 +68,23 @@
                             });
                         }
                     },
-                    error: function(xhr, status, error) {
-                        Swal.fire({
-                            title: "AJAX Error:",
-                            text: "An unexpected error occurred. Please try again.",
-                            icon: "error"
-                        });
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.errors;
+                            let message = Object.values(errors).flat().join('\n');
+
+                            Swal.fire({
+                                title: "Validation Error",
+                                text: message,
+                                icon: "warning"
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "AJAX Error",
+                                text: "An unexpected error occurred. Please try again.",
+                                icon: "error"
+                            });
+                        }
                     },
                 });
             });
