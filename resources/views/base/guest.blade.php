@@ -39,34 +39,6 @@
 
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     @vite(['resources/js/app.js'])
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const logoElement = document.getElementById('qsulogo');
-            const redirectUrl = '{{ route('login') }}';
-            const requiredClicks = 3;
-            const clickTimeoutMs = 500;
-            let clickCounter = 0;
-            let timer = 100;
-            if (logoElement) {
-                logoElement.addEventListener('click', function() {
-                    clickCounter++;
-                    if (clickCounter === requiredClicks) {
-                        clearTimeout(timer);
-                        clickCounter = 0;
-                        window.location.href = redirectUrl;
-                        return;
-                    }
-                    if (timer) {
-                        clearTimeout(timer);
-                    }
-                    timer = setTimeout(() => {
-                        clickCounter = 0;
-                        timer = null;
-                    }, clickTimeoutMs);
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>
