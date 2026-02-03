@@ -1,7 +1,6 @@
 @extends('base.admin')
 @section('title', 'View Document Request- Registrar Office (QSU)')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/plugins/jQueryUI/jquery-ui.css') }}" type="text/css" />
 @endsection
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -37,7 +36,6 @@
             <div class="wrapper wrapper-content animated fadeInDown">
                 <div class="ibox">
                     <div class="ibox-content doc-view-card">
-
                         <div class="doc-header">
                             <div class="doc-header-left">
                                 <div class="doc-icon">
@@ -68,7 +66,7 @@
 
                             <div>
                                 <div class="doc-label">Course</div>
-                                <div class="doc-value">{{ $data->course  ?? 'N/A' }}</div>
+                                <div class="doc-value">{{ $data->course ?? 'N/A' }}</div>
                             </div>
 
                             <div>

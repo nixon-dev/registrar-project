@@ -31,7 +31,7 @@ class GuestController extends Controller
                 ->with('error', 'No document found for this Student ID.');
         }
 
-        return view('guest.result', compact('data'));
+        return view('guest.result', compact('data', 'studentId'));
 
     }
 

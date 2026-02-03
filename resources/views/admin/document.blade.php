@@ -189,5 +189,4 @@
 @endsection
 @section('script')
     <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}" defer></script>
-    <script src="{{ asset('js/datatable.js') }}" defer></script>
 @endsection
