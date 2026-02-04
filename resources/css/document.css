@@ -21,6 +21,22 @@
     background: #faf5ff;
 }
 
+.check-lg {
+    transform: scale(1.4);
+}
+
+#documentTable tbody tr.selected {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+
+#documentTable tbody tr td input.selected {
+    background-color: rgba(13, 110, 253, 0.1);
+}
+#documentTable tbody tr {
+    cursor: default;
+  }
+  
+
 /* Header */
 .doc-header {
     display: flex;
@@ -88,7 +104,7 @@
 .doc-remarks {
     margin-top: 1.2rem;
     padding-top: 1rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 #documentTable thead th {
@@ -108,7 +124,6 @@
     letter-spacing: 0.03em;
     color: #374151;
 }
-
 
 #documentTable {
     border-collapse: separate;
@@ -132,7 +147,7 @@
 
     padding: 0.7rem 0.9rem;
     background: #ffffff;
-    
+
     width: fit-content;
 
     animation: slideUp 0.25s ease;
@@ -149,11 +164,9 @@
     }
 }
 
-
 .bulk-actions .form-select {
-    min-width: 160px;
+    min-width: 200px;
 }
-
 
 .bulk-select {
     position: relative;
@@ -163,9 +176,10 @@
 
 .bulk-select i {
     position: absolute;
+    align-items: center;
     left: 10px;
-    color: #000000;
-    font-size: 1.1rem;
+    color: #363636;
+    font-size: 0.8rem;
 }
 
 .bulk-select select {
@@ -179,8 +193,6 @@
 
 .bulk-select select:focus {
     outline: none;
-    border-color: #9121fe;
+    border-color: #000000;
     background: #ffffff;
 }
-
-

@@ -9,6 +9,8 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: ajaxUrl,
+        info: false,
+        paging: true, 
 
         language: {
             zeroRecords: "No Request Found",
@@ -78,7 +80,7 @@ $(document).ready(function () {
                 var column = this;
 
                 var select = $(
-                    '<select style="width:100%"><option value=""></option></select>'
+                    '<select class="wp-100"><option value=""></option></select>'
                 )
                     .appendTo($(column.header()).empty())
                     .on("change", function () {
@@ -104,6 +106,8 @@ $(document).ready(function () {
                 }
             });
         },
+
+        
     });
 
     $.ajaxSetup({
@@ -113,9 +117,22 @@ $(document).ready(function () {
     });
 });
 
-$("#select-all").on("click", function () {
-    $(".row-checkbox").prop("checked", this.checked);
+$('#documentTable tbody').on('click', 'tr', function (e) {
+    if ($(e.target).is('input, button, a, i')) return;
+    if ($(e.target).closest('td').is(':last-child')) return;
+
+    const checkbox = $(this).find('.row-checkbox');
+
+    checkbox
+        .prop('checked', !checkbox.prop('checked'))
+        .trigger('change');
+
+    $(this).toggleClass('selected', checkbox.prop('checked'));
 });
+
+
+
+
 
 $(document).on("change", ".row-checkbox", function () {
     if (!this.checked) {
@@ -124,10 +141,10 @@ $(document).on("change", ".row-checkbox", function () {
 });
 
 
-const select   = $('#bulk-status');
-const bulkUrl  = select.data('bulk-url');
-const bulkCsrf = select.data('bulk-csrf');
 
+const select = $("#bulk-status");
+const bulkUrl = select.data("bulk-url");
+const bulkCsrf = select.data("bulk-csrf");
 
 $("#apply-bulk").on("click", function () {
     const status = $("#bulk-status").val();
@@ -206,11 +223,23 @@ function updateBulkUI() {
     }
 }
 
-$("#documentTable").on("change", ".row-checkbox", updateBulkUI);
+$("#documentTable").on("change", ".row-checkbox", function () {
+    const row = $(this).closest("tr");
+    row.toggleClass("selected", this.checked);
+    updateBulkUI();
+});
+
 
 $("#documentTable").on("change", "#select-all", function () {
+    $(".row-checkbox")
+        .prop("checked", this.checked)
+        .trigger("change");
+        updateBulkUI();
+});
+
+
+$("#select-all").on("click", function () {
     $(".row-checkbox").prop("checked", this.checked);
-    updateBulkUI();
 });
 
 $("#bulk-status").on("change", function () {

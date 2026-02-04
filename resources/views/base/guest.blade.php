@@ -13,7 +13,7 @@
     <div class="loginColumns " style="margin-top: -50px;">
         <div class="row">
             <div class="col-sm-12 d-flex justify-content-center mb-2 animated fadeInDown">
-                <img id="qsulogo" src="{{ asset('img/logo/QSU.png') }}"
+                <img id="qsulogo" src="{{ asset('img/logo/QSU.webp') }}"
                     style="width: 150px; height: auto; object-fit: cover;" loading="lazy" />
             </div>
             <div class="col-sm-12 animated fadeIn">

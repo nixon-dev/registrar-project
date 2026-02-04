@@ -360,7 +360,7 @@ class AdminController extends Controller
             })
             ->addColumn('cbt', function ($d) {
                 return '<input type="checkbox"
-                    class="row-checkbox"
+                    class="row-checkbox check-lg"
                     value="' . $d->dr_id . '">';
             })
             ->rawColumns(['view', 'cbt'])

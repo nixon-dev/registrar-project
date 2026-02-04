@@ -16,7 +16,7 @@
     <div class="loginColumns animated fadeInUp" style="margin-top: -50px;">
         <div class="row">
             <div class="col-sm-12 d-flex justify-content-center mb-4">
-                <a href="{{ route('home') }}"> <img src="{{ asset('img/logo/QSU.png') }}"
+                <a href="{{ route('home') }}"> <img src="{{ asset('img/logo/QSU.webp') }}"
                         style="width: 150px; height: auto; object-fit: cover;" loading="lazy" /></a>
             </div>
             <div class="col-md-12">

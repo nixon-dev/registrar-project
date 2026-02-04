@@ -22,8 +22,8 @@
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header ">
                         <div class="dropdown profile-element">
-                            <img alt="image" class="rounded-circle" src="{{ asset('img/logo/qsu-dashboard.png') }}"
-                                style="width: 50px; height: 50x; object-fit: cover;" loading="lazy" />
+                            <img alt="image" class="rounded-circle" src="{{ asset('img/logo/qsu-dashboard.webp') }}"
+                                style="object-fit: cover;" loading="lazy" width="50" height="50" alt="Quirino State University Logo"/>
                             <span class="block m-t-xs font-bold">{{ Auth::user()->name ?? 'Guest Name' }}</span>
                             <span class="text-muted text-xs block">{{ Auth::user()->role ?? 'Guest' }}</span>
                         </div>

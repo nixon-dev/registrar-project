@@ -1,9 +1,5 @@
 @extends('base.admin')
 @section('title', 'Document Request - Registrar Office (QSU)')
-@section('css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="{{ asset('css/plugins/dataTables/datatables.min.css') }}" rel="stylesheet">
-@endsection
 @section('content')
     <div class="row wrapper border-bottom page-heading">
         <div class="col-sm-12">
@@ -38,11 +34,11 @@
                             <div id="bulk-actions" class="bulk-actions d-none pull-left">
                                 <span class="bulk-count"></span>
                                 <div class="bulk-select">
-                                    <i class="bi bi-arrow-repeat"></i>
-                        
-                                    <select id="bulk-status" class="form-control" data-bulk-url="{{ route('admin.documents.bulkUpdate') }}"
+
+                                    <select id="bulk-status" class="form-control"
+                                        data-bulk-url="{{ route('admin.documents.bulkUpdate') }}"
                                         data-bulk-csrf="{{ csrf_token() }}">
-                                        <option value="" selected disabled>Change status…</option>
+                                        <option value="" selected disabled>Change status</option>
                                         <option value="Pending">Pending</option>
                                         <option value="Processing">Processing</option>
                                         <option value="Ready for Pickup">Ready for Pickup</option>
@@ -50,7 +46,7 @@
                                     </select>
                                 </div>
                                 <button id="apply-bulk" class="btn btn-primary btn-md">
-                                    Update Status
+                                    <i class="bi bi-floppy"></i> Save Changes
                                 </button>
                             </div>
                             </a>
@@ -63,7 +59,7 @@
                             <thead>
                                 <tr>
                                     <th class="wp-5">
-                                        <input type="checkbox" id="select-all">
+                                        <input type="checkbox" id="select-all" class="check-lg">
                                     </th>
                                     <th class="wp-10">Request Date</th>
                                     <th class="wp-10">Student ID</th>
@@ -76,18 +72,6 @@
                             </thead>
                             <tbody>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th>Request Date</th>
-                                    <th>Student ID</th>
-                                    <th>Name</th>
-                                    <th>Type of Request</th>
-                                    <th>Processed By</th>
-                                    <th>Status</th>
-                                    <th>View</th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -145,8 +129,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Middle Name</label>
-                                            <input type="text" name="middle_name" placeholder=""
-                                                class="form-control ">
+                                            <input type="text" name="middle_name" placeholder="" class="form-control ">
                                         </div>
                                     </div>
                                 </div>
@@ -189,5 +172,5 @@
     </div>
 @endsection
 @section('script')
-    <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}" defer></script>
+    <script src="{{ asset('js/dtab.js') }}" defer></script>
 @endsection
