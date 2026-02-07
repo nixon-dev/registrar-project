@@ -87,11 +87,6 @@
                             <h3 class="m-t-none m-b">Request Info</h3>
                             <form role="form" action="{{ route('admin.document-add-request') }}" method="POST">
                                 @csrf()
-                                <div class="form-group d-none">
-                                    <label>ID</label>
-                                    <input type="text" name="admin_id" value="{{ Auth::id() }}" class="form-control"
-                                        readonly>
-                                </div>
                                 <div class="form-group">
                                     <label>Request Type *</label>
                                     <select name="request_type" class="form-control" required>
@@ -106,7 +101,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group ">
                                             <label>Student ID *</label>
-                                            <input type="text" name="student_id" placeholder="" class="form-control "
+                                            <input type="text" name="student_id" placeholder="" pattern="^[0-9]{2}-[0-9]{4,6}$" class="form-control "
                                                 required>
                                         </div>
                                     </div>

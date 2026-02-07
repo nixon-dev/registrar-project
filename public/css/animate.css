@@ -12,11 +12,7 @@
     animation-iteration-count: infinite;
 }
 
-.fadeIn {
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
-    animation-delay: 0.5s;
-}
+
 
 @-webkit-keyframes fadeInDown {
     0% {
@@ -261,6 +257,7 @@
 .fadeInUp {
     -webkit-animation-name: fadeInUp;
     animation-name: fadeInUp;
+    animation-delay: 1s;
 }
 
 @-webkit-keyframes fadeInUpBig {
@@ -884,4 +881,21 @@
 .slideInUp {
     -webkit-animation-name: slideInUp;
     animation-name: slideInUp;
+}
+
+
+@keyframes peyd {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    -webkit-animation-name: peyd;
+    animation-name: peyd;
+    animation-delay: 0.5s;
 }

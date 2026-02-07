@@ -60,8 +60,13 @@
                             </div>
 
                             <div>
-                                <div class="doc-label">Request Date</div>
+                                <div class="doc-label">Request Printed</div>
                                 <div class="doc-value">{{ $data->request_date->format('M d, Y') }}</div>
+                            </div>
+
+                            <div>
+                                <div class="doc-label">Last Status Update</div>
+                                <div class="doc-value">{{ $data->updated_at->format('M d, Y') }}</div>
                             </div>
 
                             <div>

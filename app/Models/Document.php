@@ -60,10 +60,10 @@ class Document extends Model
     public function getStatusLabelAttribute()
     {
         return match ($this->status) {
-            'Ready for Pickup' => 'primary',
-            'Processing' => 'info',
-            'Released' => 'success',
-            default => 'warning',
+            'Ready for Pickup' => 'ready',
+            'Processing' => 'processing',
+            'Released' => 'released',
+            default => 'pending',
         };
     }
 

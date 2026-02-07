@@ -6,42 +6,44 @@
 @import "./document.css";
 @import "../../public/css/plugins/dataTables/datatables.min.css";
 
-
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source "../**/*.blade.php";
 @source "../**/*.js";
 @source "../**/*.vue";
 
-@theme {
-    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
-        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Noto Color Emoji";
+html {
+    scrollbar-gutter: stable;
 }
 
-@font-face {
-    font-display: swap;
+
+.search-box {
+    max-width: 720px;
+    margin: auto;
 }
 
-.search-container {
-    position: relative;
+.search-box .form-control {
+    border: 2px solid #9121fe;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    height: 45px;
+    box-shadow: none;
 }
 
-.search-input {
-    height: 50px;
-    border-radius: 30px;
-    padding-left: 35px;
-    border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.search-box .btn-search {
+    background: #9530fa;
+    border: 2px solid #9530fa;
+    border-radius: 0 4px 4px 0;
+    height: 45px;
+    color: white;
+    padding: 0 18px;
 }
 
-.search-icon {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: #888;
+.search-box .btn-search:hover {
+    background: #8000ff;
+    border-color: #8000ff;
 }
+
 
 .faq-section {
     max-width: 800px;

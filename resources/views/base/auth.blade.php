@@ -2,14 +2,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/ico" href="{{ asset('img/favicon.ico') }}">
-    <title> @yield('title', 'Registrar Office (QSU)')</title>
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
-    @vite(['resources/css/app.css'])
+    @include('components.head')
 </head>
 
 <body class="dark-skin-2">
@@ -17,7 +10,8 @@
         <div class="row">
             <div class="col-sm-12 d-flex justify-content-center mb-4">
                 <a href="{{ route('home') }}"> <img src="{{ asset('img/logo/QSU.webp') }}"
-                        style="width: 150px; height: auto; object-fit: cover;" loading="lazy" /></a>
+                        style="width: 150px; height: auto; object-fit: cover;" loading="lazy"
+                        alt="Quirino State University Logo" /></a>
             </div>
             <div class="col-md-12">
                 @include('components.alert')
@@ -35,7 +29,6 @@
             @yield('form')
         </div>
     </div>
-    <script src="{{ asset('js/jquery-3.1.1.min.js') }}" defer></script>
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
 </body>
-
 </html>

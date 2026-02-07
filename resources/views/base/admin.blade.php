@@ -2,17 +2,11 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/ico" href="{{ asset('img/favicon.ico') }}">
-    <title> @yield('title', 'Registrar Office (QSU)')</title>
+    @include('components.head')
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.min.css">
-    @vite(['resources/css/app.css'])
     @yield('css')
-
 </head>
 
 <body class="fixed-sidebar">
@@ -23,7 +17,8 @@
                     <li class="nav-header ">
                         <div class="dropdown profile-element">
                             <img alt="image" class="rounded-circle" src="{{ asset('img/logo/qsu-dashboard.webp') }}"
-                                style="object-fit: cover;" loading="lazy" width="50" height="50" alt="Quirino State University Logo"/>
+                                style="object-fit: cover;" loading="lazy" width="50" height="50"
+                                alt="Quirino State University Logo" />
                             <span class="block m-t-xs font-bold">{{ Auth::user()->name ?? 'Guest Name' }}</span>
                             <span class="text-muted text-xs block">{{ Auth::user()->role ?? 'Guest' }}</span>
                         </div>
@@ -118,12 +113,11 @@
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js"></script>
     <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}" defer></script>
     <script src="{{ asset('js/plugins/metisMenu/jquery.metisMenu.js') }}" defer></script>
     <script src="{{ asset('js/plugins/slimscroll/jquery.slimscroll.min.js') }}" defer></script>
-    @vite('resources/js/app.js')
     @yield('script')
 </body>
 

@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /login
+Disallow: /register
+Disallow: /admin
+Disallow: /storage
+Disallow: /api
+Disallow: /registrar-admin

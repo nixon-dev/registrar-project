@@ -32,24 +32,42 @@
     color: #000000;
 }
 
-/* Icon sizing */
+.status-pending {
+    background: linear-gradient(135deg, #EF4444, #991B1B);
+    color: #fff;
+}
+
+.status-processing {
+    background: linear-gradient(135deg, #3B82F6, #1E40AF);
+    color: #fff;
+}
+
+.status-ready {
+    background: linear-gradient(135deg, #daeb5d, #dfe30a);
+    color: #000000;
+}
+
+.status-released {
+    background: linear-gradient(135deg, #22C55E, #15803D);
+    color: #000000;
+}
+
+
 .status-pill i {
     font-size: 1rem;
     line-height: 1;
 }
 
-/* Card */
 .doc-card {
     background: #0f1115;
     border-radius: 14px;
     padding: 1.2rem 1.4rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .doc-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.45);
 }
 
 /* Header layout */

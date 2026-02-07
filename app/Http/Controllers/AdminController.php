@@ -3,26 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
-use App\Models\Attachmments;
-use App\Models\Co;
-use App\Models\PendingDocx;
 use App\Models\Sessions;
 use Auth;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\Document;
-use App\Models\History;
-use App\Models\Office;
 use App\Models\User;
-use App\Models\Items;
-use App\Models\Mooe;
-use App\Models\ResCenter;
-use App\Models\Units;
-use Illuminate\Database\QueryException;
 use App\Traits\RecordHistory;
-use Illuminate\Support\Facades\Storage;
-use Session;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -143,7 +131,6 @@ class AdminController extends Controller
     public function document_request_add(Request $request)
     {
         $request->validate([
-            'admin_id' => 'required|numeric',
             'request_date' => 'nullable|date',
             'request_type' => 'required|string',
             'student_id' => 'required|string',
@@ -158,7 +145,7 @@ class AdminController extends Controller
 
         try {
             $document = Document::create([
-                'admin_id' => $request->admin_id,
+                'admin_id' => Auth::id(),
                 'request_date' => Carbon::now(),
                 'request_type' => $request->request_type,
                 'student_id' => $request->student_id,
