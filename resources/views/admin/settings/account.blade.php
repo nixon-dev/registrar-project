@@ -17,7 +17,6 @@
     <div class="wrapper wrapper-content animated fadeInDown">
         <div class="row">
             @include('components.message')
-
             <div class="col-lg-12">
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
@@ -136,4 +135,5 @@
             });
         });
     </script>
+    <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
 @endsection

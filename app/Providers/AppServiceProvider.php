@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -32,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
                 echo Str::limit(\$__text, \$__limit);
             ?>";
         });
+        Paginator::useBootstrapFour();
+
     }
 
 

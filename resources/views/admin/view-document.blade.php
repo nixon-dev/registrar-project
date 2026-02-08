@@ -106,6 +106,9 @@
                     <form action="{{ route('admin.document-update-request', ['id' => $data->dr_id]) }}" method="POST">
                         @csrf()
                         <div class="form-group">
+                            <input type="text" class="form-control d-none" name="student_id" value="{{ $data->student_id }}">
+                        </div>
+                        <div class="form-group">
                             <select name="status" class="form-control">
                                 <option value="Pending" {{ $data->status == 'Pending' ? 'selected' : '' }}>Pending
                                 </option>

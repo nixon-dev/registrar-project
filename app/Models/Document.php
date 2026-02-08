@@ -75,6 +75,7 @@ class Document extends Model
             default => 'bi-exclamation-circle',
         };
     }
+    
 
     protected $casts = [
         'request_date' => 'date',

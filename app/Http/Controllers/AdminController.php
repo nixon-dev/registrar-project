@@ -36,8 +36,8 @@ class AdminController extends Controller
             ->groupBy('status')
             ->pluck('total', 'status');
         $pendingCount = $statusCounts['Pending'] ?? 0;
-        $approvedCount = $statusCounts['Processing'] ?? 0;
-        $deniedCount = $statusCounts['Ready for Pickup'] ?? 0;
+        $processingCount = $statusCounts['Processing'] ?? 0;
+        $readyCount = $statusCounts['Ready for Pickup'] ?? 0;
 
         $documents = Document::latest()->limit(5)->get(['dr_id', 'last_name', 'first_name', 'middle_name', 'request_type', 'created_at']);
 
@@ -94,22 +94,12 @@ class AdminController extends Controller
             'labels' => $chartLabels,
             'datasets' => $chartDatasets,
         ];
-        return view('admin.index', compact('thisMonthDocumentCount', 'lastMonthDocumentCount', 'userCount', 'activeUserCount', 'chartData', 'pendingCount', 'deniedCount', 'approvedCount', 'documents'));
+        return view('admin.index', compact('thisMonthDocumentCount', 'lastMonthDocumentCount', 'userCount', 'activeUserCount', 'chartData', 'pendingCount', 'readyCount', 'processingCount', 'documents'));
     }
-
-
-
-    // DOCUMENTS
 
     public function document_tracking()
     {
-        $data = Document::orderBy('created_at', 'DESC')
-            ->leftJoin('users', 'users.id', '=', 'document_request.admin_id')
-            ->select('document_request.*', 'users.username')
-            ->orderBy('document_request.request_date', 'desc')
-            ->get();
-
-        return view('admin.document', compact('data'));
+        return view('admin.document');
     }
 
     public function view_document($id)
@@ -177,11 +167,10 @@ class AdminController extends Controller
             'remarks' => 'nullable|string|max:255',
         ]);
 
+
         $query = Document::where('dr_id', $id)->update(['status' => $request->status, 'remarks' => $request->remarks]);
 
-        $student_id = Document::where('dr_id', $id)->value('student_id');
-
-        $this->recordHistory('Updated Status for', $student_id);
+        $this->recordHistory('Updated Status for', $request->student_id);
 
 
         if ($query) {
@@ -197,13 +186,10 @@ class AdminController extends Controller
 
     public function users_list()
     {
-        $usersList = User::where('role', '!=', 'Guest')
+        $usersList = User::where('role', '=', 'Administrator')
             ->get();
 
-        $usersPending = User::where('role', '=', 'Guest')
-            ->get();
-
-        return view('admin.settings.users', compact('usersList', 'usersPending'));
+        return view('admin.settings.users', compact('usersList'));
     }
 
     public function view_users($id)
@@ -270,12 +256,11 @@ class AdminController extends Controller
             'role' => User::role_admin,
         ]);
 
-        return response()->json([
-            'success' => (bool) $user,
-            'message' => $user
-                ? 'User created successfully!'
-                : 'Error: User creation failed.',
-        ]);
+        if ($user) {
+            return redirect()->back()->with('success', 'User created successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Error: User creation failed.');
+        }
 
     }
 
@@ -294,20 +279,9 @@ class AdminController extends Controller
 
     public function history(Request $request)
     {
-        $activities = ActivityLog::orderBy('created_at', 'desc')->limit(150)->get(['created_at', 'history_name', 'history_action', 'history_description']);
+        $activities = ActivityLog::orderBy('created_at', 'desc')->select('created_at', 'history_name', 'history_action', 'history_description')->paginate(20);
         return view('admin.history', compact('activities'));
     }
-
-    public function active_users()
-    {
-        $activeUsers = Sessions::where('last_activity', '>', Carbon::now()->subMinute(10)->getTimestamp())
-            ->leftJoin('users', 'users.id', '=', 'sessions.user_id')
-            ->orderBy('last_activity', 'desc')
-            ->get();
-        return view('admin.active-users', compact('activeUsers'));
-    }
-
-
 
 
     public function account_settings()
@@ -318,14 +292,11 @@ class AdminController extends Controller
 
     public function documentsData()
     {
-        $documents = Document::orderBy('created_at', 'desc');
+        $documents = Document::with('admin')->orderBy('created_at', 'desc');
 
         return DataTables::of($documents)
             ->addColumn('username', function ($d) {
                 return $d->admin->username ?? '';
-            })
-            ->addColumn('created_at', function ($d) {
-                return $d->created_at;
             })
             ->addColumn('view', function ($d) {
                 return '<a href="' . route('admin.document-view', ['id' => $d->dr_id]) . '" 

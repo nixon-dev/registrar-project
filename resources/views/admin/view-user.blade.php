@@ -1,11 +1,5 @@
 @extends('base.admin')
 @section('title', $info[0]->name . ' - Registrar Office (QSU)')
-@section('css')
-    <link href="{{ asset('css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-@endsection
-
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-8">
@@ -25,105 +19,54 @@
     </div>
 
     <div class="wrapper wrapper-content animated fadeInDown">
-        <div class="row">
-
-            @include('components.message')
-
-
-            <div class="col-lg-6">
-                <div class="ibox ">
-                    <div class="ibox-title">
-                        <h5>Personal Details</h5>
-                        <a href="#" class="btn btn-danger btn-xs pull-right delete-user"
-                            data-url="{{ route('admin.users-delete', ['id' => $info[0]->id]) }}">
-                            Delete User
-                        </a>
+        <div class="ibox-content doc-view-card">
+            <div class="doc-header">
+                <div class="doc-header-left">
+                    <div class="doc-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-people" viewBox="0 0 16 16">
+                            <path
+                                d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+                        </svg>
                     </div>
-                    <div class="ibox-content">
-                        <h3 class="font-bold text-dark">Name: {{ $info[0]->name }}</h3>
-                        <h4 class="text-dark">Email: {{ $info[0]->email }}</h4>
-                        <h4 class="text-dark">Created:
-                            {{ \Carbon\Carbon::parse($info[0]->created_at)->format('M d, Y - h:i A') }}</h4>
-                        <h4 class="text-dark">Role: {{ $info[0]->role }}</h4>
-
+                    <div>
+                        <div class="doc-name">{{ $info[0]->name }}</div>
+                        <div class="doc-sub"></div>
                     </div>
                 </div>
+
+                @if (Auth::id() == 1)
+                    <a href="#" class="delete-user"
+                        data-url="{{ route('admin.users-delete', ['id' => $info[0]->id]) }}">
+                        <span class="status-pill status-pending">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                <path
+                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                            </svg> <span>Delete User</span>
+                        </span>
+                    </a>
+                @endif
             </div>
-            <div class="col-lg-6">
-                <div class="ibox ">
-                    <div class="ibox-title">
-                        <h5>Assign Roles</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
 
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <form action="{{ url('/admin/users/update') }}" method="POST">
-
-                            @csrf()
-                            <div class="form-group d-none">
-                                <label>ID</label>
-                                <input type="number" name="id" value="{{ $info[0]->id }}" class="form-control"
-                                    readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Role</label>
-                                <select name="role" class="form-control" id="roleSelect">
-                                    <option value="Guest" {{ $info[0]->role == 'Guest' ? 'selected' : '' }}>Guest</option>
-                                    <option value="Administrator"
-                                        {{ $info[0]->role == 'Administrator' ? 'selected' : '' }}>Administrator</option>
-                                </select>
-                            </div>
-
-
-                            <div class="form-group text-center">
-                                <button class="btn btn-sm btn-primary m-t-n-xs w-100" type="submit"><strong>Submit</strong>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            <div class="doc-info-grid">
+                <div>
+                    <div class="doc-label">Username</div>
+                    <div class="doc-value">{{ $info[0]->username }}</div>
+                </div>
+                <div>
+                    <div class="doc-label">Role</div>
+                    <div class="doc-value">{{ $info[0]->role }}</div>
                 </div>
             </div>
+
         </div>
     </div>
 @endsection
 
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <script>
-        const roleSelect = document.getElementById('roleSelect');
-        const officeSelect = document.getElementById('mySelect');
-        const officeDiv = document.getElementById('officeDiv');
-
-        roleSelect.addEventListener('change', function() {
-            const roleValue = this.value;
-            if (roleValue === 'Staff') {
-                officeDiv.classList.remove('d-none');
-                officeSelect.required = true;
-            } else {
-                officeDiv.classList.add('d-none');
-                officeSelect.required = false;
-            }
-        });
-
-        $(document).ready(function() {
-            $('.i-checks').iCheck({
-                checkboxClass: 'icheckbox_square-green',
-            });
-        });
-        $(document).ready(function() {
-            $('#mySelect').select2({
-                placeholder: "Select an option...",
-                allowClear: true
-            });
-        });
-    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.delete-user').forEach(function(element) {

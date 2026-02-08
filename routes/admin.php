@@ -22,8 +22,6 @@ Route::middleware(['auth', 'role:Administrator'])->prefix('admin')->group(functi
 
     Route::get('/users', [AdminController::class, 'users_list'])->name('admin.users-list');
 
-    Route::get('/users-pending', [AdminController::class, 'pending_users_list'])->name('admin.users-list-pending');
-
     Route::get('/users/{id}', [AdminController::class, 'view_users'])->name('admin.users-view');
 
     Route::post('/users/update', [AdminController::class, 'users_update'])->name('admin.users-update');
@@ -37,8 +35,6 @@ Route::middleware(['auth', 'role:Administrator'])->prefix('admin')->group(functi
     Route::post('/user/update-password', [ChangePasswordController::class, 'user_update_password'])->name('admin.user-update-password');
 
     Route::get('/history', [AdminController::class, 'history'])->name('admin.history');
-
-    Route::get('/active-users', [AdminController::class, 'active_users'])->name('admin.active-users');
 
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
 

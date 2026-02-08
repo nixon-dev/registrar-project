@@ -33,28 +33,28 @@
             <div class="col-lg-12">
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
-                        <li class="nav-item" ><a class="nav-link active" data-toggle="tab" href="#users-pending"
+                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#users-list"
                                 aria-expanded="true">Users</a></li>
-                        <li class="nav-item" ><a class="nav-link" data-toggle="tab" href="#users-list"
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#users-create"
                                 aria-expanded="false">Create User</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div id="users-pending" class="tab-pane fade show active">
+                        <div id="users-list" class="tab-pane fade show active">
                             <div class="panel-body">
                                 @include('admin.settings.components.users-list')
                             </div>
                         </div>
-                        <div id="users-list" class="tab-pane fade">
+                        <div id="users-create" class="tab-pane fade">
                             <div class="panel-body">
                                 @include('admin.settings.components.users-create')
                             </div>
                         </div>
                     </div>
-
-         
-                    
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
 @endsection
