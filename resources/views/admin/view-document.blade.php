@@ -13,7 +13,7 @@
                             <a href="{{ route('admin.index') }}">Admin</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="{{ route('admin.document') }}">Document Tracking</a>
+                            <a href="{{ route('admin.document') }}">Document Request Tracking</a>
                         </li>
                         <li class="breadcrumb-item active">
                             <strong>{{ $data->dr_id }}</strong>

@@ -21,7 +21,7 @@
                 @include('components.alert')
             </div>
             <div class="col-sm-12 text-white text-center animated fadeInDown">
-                <span class="h3">Registrar Document Request</span>
+                <span class="h3">Academic Document Monitoring System</span>
                 <p>Track your requests via School ID</p>
             </div>
             @yield('form')
