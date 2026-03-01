@@ -1,0 +1,6 @@
+[20-Feb-2026 14:19:30 Asia/Manila] PHP Fatal error:  Trait "App\Models\SoftDeletes" not found in /home/adm5qsu3du/registrar/app/Models/Document.php on line 10
+[20-Feb-2026 14:19:33 Asia/Manila] PHP Fatal error:  Trait "App\Models\SoftDeletes" not found in /home/adm5qsu3du/registrar/app/Models/Document.php on line 10
+[20-Feb-2026 14:19:49 Asia/Manila] PHP Fatal error:  Trait "App\Models\SoftDeletes" not found in /home/adm5qsu3du/registrar/app/Models/Document.php on line 10
+[20-Feb-2026 14:20:02 Asia/Manila] PHP Fatal error:  Trait "App\Models\SoftDeletes" not found in /home/adm5qsu3du/registrar/app/Models/Document.php on line 10
+[20-Feb-2026 14:20:25 Asia/Manila] PHP Fatal error:  Trait "App\Models\SoftDeletes" not found in /home/adm5qsu3du/registrar/app/Models/Document.php on line 10
+[20-Feb-2026 14:20:37 Asia/Manila] PHP Fatal error:  Trait "App\Models\SoftDeletes" not found in /home/adm5qsu3du/registrar/app/Models/Document.php on line 10

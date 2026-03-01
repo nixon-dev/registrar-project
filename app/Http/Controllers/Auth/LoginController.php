@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Hash;
+
+class LoginController extends Controller
+{
+    public function showLoginForm()
+    {
+        $user = Auth::user();
+
+        if ($user == null) {
+            return view(view: 'auth.login');
+        }
+
+        if ($user->role === 'Administrator') {
+            return redirect(route('admin.index'));
+         } else {
+            return view(view: 'auth.login');
+        }
+    }
+
+    public function login(Request $request)
+    {
+        
+        $remember = !empty($request->inputRememberMe) ? true : false;
+        if (Auth::attempt(['username' => $request->inputUsername, 'password' => $request->inputPassword], $remember)) {
+
+            $user = Auth::user();
+
+            if ($user->role === 'Administrator') {
+                return redirect()->route('admin.index');
+            } else {
+                Auth::logout();
+                return redirect()->back()->with('error', "Unathorized Access");
+            }
+        } else {
+            return redirect()->back()->with('error', "Oops! That username or password doesn’t match.");
+        }
+    }
+}
