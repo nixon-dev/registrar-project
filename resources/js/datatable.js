@@ -78,34 +78,33 @@ $(document).ready(function () {
 
             api.columns([4, 5, 6]).every(function (index) {
                 var column = this;
-
-                var select = $(
-                    '<select class="wp-100"><option value=""></option></select>'
-                )
+                var select = $('<select style="width:100%"><option value="">All</option></select>')
                     .appendTo($(column.header()).empty())
                     .on("change", function () {
                         column.search($(this).val()).draw();
                     });
 
-                column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function (d) {
-                        select.append(
-                            '<option value="' + d + '">' + d + "</option>"
-                        );
+                if (index === 6) {
+                    const statuses = ["Pending", "Processing", "Ready for Pickup", "Released"];
+                    statuses.forEach(function (s) {
+                        select.append(`<option value="${s}">${s}</option>`);
                     });
-                if (index === 5) {
-                    if (
-                        select.find("option[value='" + currentUsername + "']")
-                            .length
-                    ) {
-                        select.val(currentUsername).trigger("change");
+                }
+                else {
+                    column.data().unique().sort().each(function (d) {
+                        if (d) select.append('<option value="' + d + '">' + d + '</option>');
+                    });
+
+                    if (index === 5 && currentUsername) {
+                        if (select.find("option[value='" + currentUsername + "']").length) {
+                            select.val(currentUsername).trigger("change");
+                        }
                     }
                 }
             });
         },
+
+
     });
 
     $.ajaxSetup({
@@ -115,22 +114,30 @@ $(document).ready(function () {
     });
 });
 
-$("#documentTable tbody").on("click", "tr", function (e) {
-    if ($(e.target).is("input, button, a, i")) return;
-    if ($(e.target).closest("td").is(":last-child")) return;
+$('#documentTable tbody').on('click', 'tr', function (e) {
+    if ($(e.target).is('input, button, a, i')) return;
+    if ($(e.target).closest('td').is(':last-child')) return;
 
-    const checkbox = $(this).find(".row-checkbox");
+    const checkbox = $(this).find('.row-checkbox');
 
-    checkbox.prop("checked", !checkbox.prop("checked")).trigger("change");
+    checkbox
+        .prop('checked', !checkbox.prop('checked'))
+        .trigger('change');
 
-    $(this).toggleClass("selected", checkbox.prop("checked"));
+    $(this).toggleClass('selected', checkbox.prop('checked'));
 });
+
+
+
+
 
 $(document).on("change", ".row-checkbox", function () {
     if (!this.checked) {
         $("#select-all").prop("checked", false);
     }
 });
+
+
 
 const select = $("#bulk-status");
 const bulkUrl = select.data("bulk-url");
@@ -201,10 +208,11 @@ $("#apply-bulk").on("click", function () {
     });
 });
 
+
+
 const deleteButton = $("#bulk-delete");
 const delbulkUrl = deleteButton.data("delbulk-url");
 const delbulkCsrf = deleteButton.data("delbulk-csrf");
-
 $("#bulk-delete").on("click", function () {
     const delIds = [];
 
@@ -212,11 +220,11 @@ $("#bulk-delete").on("click", function () {
         delIds.push($(this).val());
     });
 
-    if (!delIds.length) {
+    if (delIds.length === 0) {
         Swal.fire({
             icon: "warning",
             title: "No selection",
-            text: "Please select at least one request to delete.",
+            text: "Please select at least one record to delete.",
         });
         return;
     }
@@ -224,7 +232,7 @@ $("#bulk-delete").on("click", function () {
     Swal.fire({
         title: "Are you sure?",
         text: `Delete ${delIds.length} selected request(s)?`,
-        icon: "question",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Yes, delete",
     }).then((result) => {
@@ -240,7 +248,7 @@ $("#bulk-delete").on("click", function () {
                     if (res.success) {
                         Swal.fire({
                             icon: "success",
-                            title: "Updated!",
+                            title: "Deleted!",
                             text: res.message,
                             timer: 1500,
                             showConfirmButton: false,
@@ -284,10 +292,14 @@ $("#documentTable").on("change", ".row-checkbox", function () {
     updateBulkUI();
 });
 
+
 $("#documentTable").on("change", "#select-all", function () {
-    $(".row-checkbox").prop("checked", this.checked).trigger("change");
+    $(".row-checkbox")
+        .prop("checked", this.checked)
+        .trigger("change");
     updateBulkUI();
 });
+
 
 $("#select-all").on("click", function () {
     $(".row-checkbox").prop("checked", this.checked);
