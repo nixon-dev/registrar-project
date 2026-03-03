@@ -164,12 +164,22 @@ class AdminController extends Controller
     {
 
         $request->validate([
+            'student_id' => 'required|string',
+            'last_name' => 'required|string|max:50',
+            'first_name' => 'required|string|max:50',
+            'middle_name' => 'nullable|string|max:50',
             'status' => 'required|string',
             'remarks' => 'nullable|string|max:255',
         ]);
 
 
-        $query = Document::where('dr_id', $id)->update(['status' => $request->status, 'remarks' => $request->remarks]);
+        $query = Document::where('dr_id', $id)->update([
+            'student_id' => $request->student_id,
+            'last_name' => $request->last_name,
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'status' => $request->status,
+            'remarks' => $request->remarks]);
 
         $this->recordHistory('Updated Status for', $request->student_id);
         
