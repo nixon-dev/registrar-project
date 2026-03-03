@@ -99,7 +99,7 @@
         </div>
 
     </div>
-    <div id="modal" class="modal fade" aria-hidden="true">
+     <div id="modal" class="modal fade" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -109,6 +109,18 @@
                         <div class="form-group">
                             <label class="form-label">Student ID</label>
                             <input type="text" class="form-control" name="student_id" value="{{ $data->student_id }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" value="{{ $data->last_name }}">
+                        </div>
+                         <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" name="first_name" value="{{ $data->first_name }}">
+                        </div>
+                         <div class="form-group">
+                            <label class="form-label">Middle Name</label>
+                            <input type="text" class="form-control" name="middle_name" value="{{ $data->middle_name }}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Status</label>
