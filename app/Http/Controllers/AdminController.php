@@ -51,14 +51,25 @@ class AdminController extends Controller
             request_type,
             count(*) as aggregate
             ")
-            ->whereDate('document_request.request_date', '>=', now()->subMonth())
-            ->groupByRaw("date_format(document_request.request_date, '%Y-%m-%d'), date_format(document_request.request_date, '%b %d'), request_type")
-            ->get();
-        $allDates = $rawData->pluck('full_date')
-            ->unique()
-            ->sortBy(fn($date) => \Carbon\Carbon::parse($date))
-            ->values();
-        $chartLabels = $allDates->map(fn($date) => $rawData->where('full_date', $date)->first()->month_day)->toArray();
+            ->whereDate('document_request.request_date', '>=', now()->subDays(6))
+            ->groupByRaw("
+                date_format(document_request.request_date, '%Y-%m-%d'),
+                date_format(document_request.request_date, '%b %d'),
+                request_type
+            ")->get();
+
+        $allDates = collect();
+
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i);
+            $allDates->push([
+                'full_date' => $date->format('Y-m-d'),
+                'month_day' => $date->format('M d')
+            ]);
+        }
+
+        $chartLabels = $allDates->pluck('month_day')->toArray();
+
         $requestTypes = $rawData->pluck('request_type')->unique();
         $chartDatasets = [];
         $colors = [
@@ -74,7 +85,7 @@ class AdminController extends Controller
             $currentColor = $colors[$colorIndex % count($colors)];
 
             foreach ($allDates as $date) {
-                $count = $rawData->where('full_date', $date)
+                $count = $rawData->where('full_date', $date['full_date'])
                     ->where('request_type', $type)
                     ->pluck('aggregate')
                     ->first();
